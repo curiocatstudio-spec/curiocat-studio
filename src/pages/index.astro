@@ -5,7 +5,7 @@ import GameCard from '../components/GameCard.astro';
 import { getCollection } from 'astro:content';
 
 const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
-const featured = games.slice(0, 3);
+const featured = games.slice(0, 1);
 ---
 
 <Layout title="Home">
@@ -61,20 +61,20 @@ const featured = games.slice(0, 3);
         <a href="/games" class="curio-plate text-bone/70 hover:text-gold transition-colors">View All &rarr;</a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-charcoal-border">
-        {featured.map((game, i) => (
-          <GameCard
-            slug={game.slug}
-            title={game.data.title}
-            tagline={game.data.tagline}
-            genre={game.data.genre}
-            status={game.data.status}
-            cover={game.data.cover}
-            accent={game.data.accent}
-            index={i}
-          />
-        ))}
-      </div>
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {games.map((game, i) => (
+        <GameCard
+          slug={game.slug}
+          title={game.data.title}
+          tagline={game.data.tagline}
+          genre={game.data.genre}
+          status={game.data.status}
+          cover={game.data.cover}
+          accent={game.data.accent}
+          index={i}
+        />
+      ))}
+    </div>
     </div>
   </section>
 

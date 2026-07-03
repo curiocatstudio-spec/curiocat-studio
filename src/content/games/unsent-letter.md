@@ -1,24 +1,35 @@
 ---
 title: "Unsent Letter"
 tagline: "Some words should have arrived sooner."
+
 genre: "Psychological Horror"
+
 status: "in-development"
-platform: "PC (Windows) — Unity"
+
+platform: "PC (Windows)"
+
 engine: "Unity"
-cover: "/images/games/unsent-letter-cover.jpg"
-trailerUrl: ""
+
+cover: "/images/games/unsent-letter-cover.png"
+
+trailer:
+  youtube: "https://www.youtube.com/watch?v=XXXXXXXX"
+  poster: "/images/games/unsent-letter-trailer-cover.png"
+
 gallery:
   - "/images/games/unsent-letter-shot-1.jpg"
   - "/images/games/unsent-letter-shot-2.jpg"
   - "/images/games/unsent-letter-shot-3.jpg"
   - "/images/games/unsent-letter-shot-4.jpg"
+
 order: 1
+
 accent: "crimson"
 ---
 
 **Unsent Letter** is a first-person psychological horror game about a letter that was never delivered, and the house that refuses to let it go.
 
-You play as someone returning to a childhood home to clear it out after a death in the family. What starts as a quiet, mundane task — sorting boxes, reading old mail — slowly unravels into something else, as unfinished words left behind begin to demand to be read.
+You play as someone who inadvertently enters the premises to tidy up the place. What begins as a quiet, mundane job—sorting and reading old letters—slowly transforms into something else as unspoken words begin to demand to be read.
 
 The game leans on slow-burn atmosphere over jump scares: environmental storytelling, restrained sound design, and a house that seems to remember more than the people who lived in it. Every room holds a fragment of a story the player has to piece together themselves.
 
