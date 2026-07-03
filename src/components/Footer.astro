@@ -1,0 +1,53 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-charcoal-border bg-void">
+  <div class="max-w-6xl mx-auto px-6 md:px-8 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <img
+          src="/images/logo1.png"
+          alt="CurioCat Studio Logo"
+          class="nav-logo"
+        />
+        <span class="font-display text-sm uppercase tracking-tightest font-bold text-bone">CurioCat Studio</span>
+      </div>
+      <p class="text-sm text-muted leading-relaxed max-w-xs">
+        An independent game development studio in Surabaya, Indonesia — crafting stories worth experiencing.
+      </p>
+    </div>
+
+    <div>
+      <p class="curio-plate mb-4">Navigate</p>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/games" class="text-bone/70 hover:text-gold transition-colors">Games</a></li>
+        <li><a href="/about" class="text-bone/70 hover:text-gold transition-colors">About</a></li>
+        <li><a href="/blog" class="text-bone/70 hover:text-gold transition-colors">Dev Blog</a></li>
+        <li><a href="/contact" class="text-bone/70 hover:text-gold transition-colors">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="curio-plate mb-4">Find us</p>
+      <ul class="space-y-2 text-sm">
+        <li><a href="mailto:curiocatstudio@gmail.com" class="text-bone/70 hover:text-gold transition-colors">curiocatstudio@gmail.com</a></li>
+        <li class="text-bone/70">Surabaya, Indonesia</li>
+        <li>
+          <a href="#" class="text-bone/70 hover:text-gold transition-colors">Instagram</a>
+          <span class="text-charcoal-border mx-1">/</span>
+          <a href="#" class="text-bone/70 hover:text-gold transition-colors">X</a>
+          <span class="text-charcoal-border mx-1">/</span>
+          <a href="https://curiocat-studio.itch.io/" class="text-bone/70 hover:text-gold transition-colors">itch.io</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-charcoal-border">
+    <div class="max-w-6xl mx-auto px-6 md:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p class="text-xs text-muted">&copy; {year} CurioCat Studio. Every game has a story worth experiencing.</p>
+      <p class="text-xs text-muted">Built with Astro.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const games = await getCollection('games');
+  return games.map((game) => ({
+    params: { slug: game.slug },
+    props: { game },
+  }));
+}
+
+const { game } = Astro.props;
+const { Content } = await render(game);
+
+const statusLabel: Record<string, string> = {
+  released: 'Released',
+  'in-development': 'In Development',
+  concept: 'Concept',
+};
+
+const accentClass = game.data.accent === 'crimson' ? 'text-crimson-bright' : 'text-gold';
+---
+
+<Layout title={game.data.title} description={game.data.tagline}>
+  <!-- HEADER -->
+  <section class="relative pt-36 pb-14 px-6 border-b border-charcoal-border">
+    <div class="max-w-4xl mx-auto" data-reveal="fade">
+      <a href="/games" class="curio-plate text-bone/60 hover:text-gold transition-colors">&larr; All Games</a>
+      <p class={`curio-plate mt-6 mb-3 ${accentClass}`}>{game.data.genre} &middot; {statusLabel[game.data.status]}</p>
+      <h1 class="font-display text-4xl md:text-6xl uppercase tracking-tightest font-semibold text-bone">{game.data.title}</h1>
+      <p class="mt-4 text-lg text-muted max-w-xl">{game.data.tagline}</p>
+
+      <div class="flex flex-wrap gap-x-8 gap-y-2 mt-8 text-sm">
+        <div>
+          <p class="curio-plate text-muted mb-1">Platform</p>
+          <p class="text-bone/80">{game.data.platform}</p>
+        </div>
+        <div>
+          <p class="curio-plate text-muted mb-1">Engine</p>
+          <p class="text-bone/80">{game.data.engine}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAILER -->
+  <section class="py-16 px-6 border-b border-charcoal-border">
+    <div class="max-w-4xl mx-auto" data-reveal="scale">
+      <p class="eyebrow mb-4">Trailer</p>
+      <div class="relative aspect-video overflow-hidden border border-charcoal-border bg-charcoal grain-panel">
+        {game.data.trailerUrl ? (
+          <video controls class="w-full h-full object-cover" poster={game.data.cover}>
+            <source src={game.data.trailerUrl} type="video/mp4" />
+          </video>
+        ) : (
+          <div class="w-full h-full flex flex-col items-center justify-center gap-3">
+            <img src={game.data.cover} alt={`${game.data.title} placeholder`} class="absolute inset-0 w-full h-full object-cover opacity-30" />
+            <div class="relative z-10 flex flex-col items-center gap-3 text-center px-6">
+              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" class="text-gold">
+                <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.4" />
+                <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor" />
+              </svg>
+              <p class="curio-plate text-muted">Trailer coming soon</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOT GALLERY -->
+  {game.data.gallery.length > 0 && (
+    <section class="py-16 px-6 border-b border-charcoal-border">
+      <div class="max-w-5xl mx-auto">
+        <p class="eyebrow mb-6" data-reveal="fade">Gallery</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {game.data.gallery.map((shot: string, i: number) => (
+            <div
+              class="relative aspect-video overflow-hidden border border-charcoal-border group"
+              data-reveal="scale"
+              style={`--delay:${i * 80}ms`}
+            >
+              <img
+                src={shot}
+                alt={`${game.data.title} screenshot ${i + 1}`}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CONTENT -->
+  <section class="py-16 px-6">
+    <article class="max-w-2xl mx-auto prose-cc" data-reveal="fade">
+      <Content />
+    </article>
+  </section>
+</Layout>
+
+<style is:global>
+  .prose-cc h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.5rem;
+    color: #F2F0EA;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose-cc p {
+    color: #8C8A85;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+  .prose-cc strong {
+    color: #F2F0EA;
+  }
+  .prose-cc ul {
+    margin: 1.25rem 0;
+    padding-left: 1.25rem;
+  }
+  .prose-cc li {
+    color: #8C8A85;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+    list-style: none;
+    position: relative;
+    padding-left: 1.25rem;
+  }
+  .prose-cc li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 6px;
+    background: #C9A15A;
+    border-radius: 999px;
+  }
+  .prose-cc em {
+    color: #9C978C;
+  }
+</style>

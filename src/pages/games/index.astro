@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import GameCard from '../../components/GameCard.astro';
+import { getCollection } from 'astro:content';
+
+const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Games" description="Explore the games in development at CurioCat Studio, from psychological horror to character-driven adventures.">
+  <section class="relative pt-40 pb-16 px-6 border-b border-charcoal-border">
+    <div class="max-w-6xl mx-auto" data-reveal="fade">
+      <p class="eyebrow mb-4">Our Work</p>
+      <h1 class="font-display text-4xl md:text-6xl uppercase tracking-tightest font-semibold text-bone max-w-2xl">
+        Games in the Cabinet
+      </h1>
+      <p class="mt-6 text-muted max-w-xl leading-relaxed">
+        Every project at CurioCat Studio starts with a question worth chasing. Here's what we're
+        currently building, exploring, and dreaming up.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 px-6">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {games.map((game, i) => (
+        <GameCard
+          slug={game.slug}
+          title={game.data.title}
+          tagline={game.data.tagline}
+          genre={game.data.genre}
+          status={game.data.status}
+          cover={game.data.cover}
+          accent={game.data.accent}
+          index={i}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>

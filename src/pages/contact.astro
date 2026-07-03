@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact" description="Get in touch with CurioCat Studio — for press, collaboration, publishing, or just to say hello.">
+  <section class="relative pt-40 pb-24 px-6 min-h-screen">
+    <div class="grid-backdrop"></div>
+    <div class="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div data-reveal="left">
+        <p class="eyebrow mb-4">Get in Touch</p>
+        <h1 class="font-display text-4xl md:text-6xl uppercase tracking-tightest font-semibold text-bone leading-tight mb-6">
+          Let's talk about <span class="text-gold">stories.</span>
+        </h1>
+        <p class="text-muted leading-relaxed mb-10 max-w-sm">
+          Press, publishing, collaboration, or just want to say you liked the cat logo — we'd love
+          to hear from you.
+        </p>
+
+        <dl class="space-y-6">
+          <div>
+            <dt class="curio-plate text-muted mb-1">Email</dt>
+            <dd><a href="mailto:curiocatstudio@gmail.com" class="text-bone hover:text-gold transition-colors">curiocatstudio@gmail.com</a></dd>
+          </div>
+          <div>
+            <dt class="curio-plate text-muted mb-1">Studio</dt>
+            <dd class="text-bone">Surabaya, Indonesia</dd>
+          </div>
+          <div>
+            <dt class="curio-plate text-muted mb-1">Elsewhere</dt>
+            <dd class="flex gap-4 mt-1">
+              <a href="#" class="text-bone/70 hover:text-gold transition-colors">Instagram</a>
+              <a href="#" class="text-bone/70 hover:text-gold transition-colors">X</a>
+              <a href="https://curiocat-studio.itch.io/" class="text-bone/70 hover:text-gold transition-colors">itch.io</a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div data-reveal="right" style="--delay:120ms">
+        <form id="contact-form" class="panel p-8 space-y-6" novalidate>
+          <div>
+            <label for="name" class="curio-plate block mb-2 text-muted">Name</label>
+            <input
+              type="text" id="name" name="name" required
+              class="w-full bg-transparent border-b border-charcoal-border py-2 text-bone focus:border-gold outline-none transition-colors placeholder:text-muted/50"
+              placeholder="Your name"
+            />
+          </div>
+          <div>
+            <label for="email" class="curio-plate block mb-2 text-muted">Email</label>
+            <input
+              type="email" id="email" name="email" required
+              class="w-full bg-transparent border-b border-charcoal-border py-2 text-bone focus:border-gold outline-none transition-colors placeholder:text-muted/50"
+              placeholder="you@example.com"
+            />
+          </div>
+          <div>
+            <label for="message" class="curio-plate block mb-2 text-muted">Message</label>
+            <textarea
+              id="message" name="message" required rows="4"
+              class="w-full bg-transparent border-b border-charcoal-border py-2 text-bone focus:border-gold outline-none transition-colors resize-none placeholder:text-muted/50"
+              placeholder="Tell us what's on your mind"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full px-6 py-3 bg-gold text-void text-sm font-medium tracking-wide hover:bg-gold-bright transition-colors"
+          >
+            Send Message
+          </button>
+          <p id="form-status" class="text-sm text-muted text-center" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function initForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const status = document.getElementById('form-status');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // This is a front-end placeholder. Wire this up to your form backend
+      // of choice (Formspree, Resend, a serverless function, etc.).
+      status.textContent = 'Thanks — this form is a placeholder. Connect it to a backend to receive messages.';
+      status.classList.add('text-gold');
+    });
+  }
+  initForm();
+  document.addEventListener('astro:page-load', initForm);
+</script>

@@ -1,0 +1,69 @@
+---
+interface Props {
+  class?: string;
+  size?: number;
+  autoplay?: boolean;
+}
+const { class: className = '', size = 140, autoplay = true } = Astro.props;
+---
+
+<svg
+  class={`curiocat-logo ${className}`}
+  width={size}
+  height={size}
+  viewBox="0 0 220 200"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="CurioCat Studio logo"
+  data-autoplay={autoplay ? 'true' : 'false'}
+>
+  <path
+    class="cat-line cat-path-body"
+    d="M118 118
+       C 118 145, 96 160, 70 158
+       C 44 156, 24 138, 24 112
+       C 24 86, 46 68, 74 68
+       C 92 68, 106 76, 116 90"
+  />
+  <path
+    class="cat-line cat-path-ears"
+    d="M116 90
+       L 108 30
+       L 148 74
+       L 168 26
+       L 190 92
+       L 150 128
+       L 118 118"
+  />
+  <ellipse class="cat-eye cat-eye-l" cx="132" cy="98" rx="4.2" ry="7" />
+  <ellipse class="cat-eye cat-eye-r" cx="160" cy="98" rx="4.2" ry="7" style="animation-delay:1.62s"></ellipse>
+</svg>
+
+<script>
+  function initCatLogos() {
+    const logos = document.querySelectorAll<SVGSVGElement>('.curiocat-logo[data-autoplay="true"]');
+    logos.forEach((svg) => {
+      const paths = svg.querySelectorAll<SVGPathElement>('path.cat-line');
+      paths.forEach((path) => {
+        const len = path.getTotalLength();
+        path.style.setProperty('--len', String(len));
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCatLogos);
+  } else {
+    initCatLogos();
+  }
+  document.addEventListener('astro:page-load', initCatLogos);
+</script>
+
+<style>
+  .cat-path-ears {
+    animation-delay: 0.05s;
+  }
+  .cat-path-body {
+    animation-delay: 0.55s;
+  }
+</style>

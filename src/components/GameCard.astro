@@ -1,0 +1,51 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  tagline: string;
+  genre: string;
+  status: 'released' | 'in-development' | 'concept';
+  cover: string;
+  accent?: 'gold' | 'crimson';
+  index?: number;
+}
+
+const { slug, title, tagline, genre, status, cover, accent = 'gold', index = 0 } = Astro.props;
+
+const statusLabel: Record<string, string> = {
+  'released': 'Released',
+  'in-development': 'In Development',
+  'concept': 'Concept',
+};
+
+const accentClass = accent === 'crimson' ? 'text-crimson-bright' : 'text-gold';
+const accentBorder = accent === 'crimson' ? 'group-hover:border-crimson-bright/60' : 'group-hover:border-gold/60';
+---
+
+<a
+  href={`/games/${slug}`}
+  class={`group relative block overflow-hidden bg-panel transition-colors duration-500 border border-transparent ${accentBorder}`}
+  data-reveal="scale"
+  style={`--delay:${index * 90}ms`}
+>
+  <div class="relative aspect-[16/9] overflow-hidden">
+    <img
+      src={cover}
+      alt={`${title} cover art`}
+      class="w-full h-full object-cover grayscale-[0.2] contrast-[1.05] transition-transform duration-700 ease-out group-hover:scale-105"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent"></div>
+    <span class={`curio-plate absolute top-4 left-4 px-2 py-1 bg-black/80 ${accentClass}`}>
+      {statusLabel[status]}
+    </span>
+    <span class="curio-plate absolute top-4 right-4 text-bone/40">
+      {String(index + 1).padStart(2, '0')}
+    </span>
+  </div>
+  <div class="p-6 border-t border-charcoal-border">
+    <p class={`curio-plate mb-2 ${accentClass}`}>{genre}</p>
+    <h3 class="font-display text-xl uppercase tracking-tightest font-semibold text-bone mb-2 group-hover:text-gold transition-colors">{title}</h3>
+    <p class="text-sm text-muted leading-relaxed">{tagline}</p>
+  </div>
+</a>

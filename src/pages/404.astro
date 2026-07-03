@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CatLogoAnimated from '../components/CatLogoAnimated.astro';
+---
+
+<Layout title="Page Not Found">
+  <section class="min-h-screen flex flex-col items-center justify-center px-6 text-center">
+    <CatLogoAnimated size={96} class="mb-8" />
+    <p class="curio-plate text-gold mb-4">404</p>
+    <h1 class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone mb-4">This page wandered off.</h1>
+    <p class="text-muted mb-8 max-w-sm">
+      Even the cat couldn't find it. Let's get you back somewhere familiar.
+    </p>
+    <a href="/" class="px-7 py-3 bg-gold text-void text-sm font-medium tracking-wide hover:bg-gold-bright transition-colors">
+      Back to Home
+    </a>
+  </section>
+</Layout>

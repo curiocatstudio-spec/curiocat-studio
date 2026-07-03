@@ -1,0 +1,117 @@
+---
+const links = [
+  { href: '/games', label: 'Games' },
+  { href: '/about', label: 'About' },
+  { href: '/blog', label: 'Dev Blog' },
+  { href: '/contact', label: 'Contact' },
+];
+const currentPath = Astro.url.pathname;
+---
+
+<header class="glass-nav fixed top-0 left-0 right-0 z-50" id="site-nav">
+  <nav class="max-w-6xl mx-auto px-6 md:px-8 h-16 md:h-20 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 group">
+      <img
+        src="/images/logo1.png"
+        alt="CurioCat Studio Logo"
+        class="nav-logo"
+      />
+      <span class="font-display text-sm md:text-base uppercase tracking-tightest font-bold text-bone group-hover:text-gold transition-colors">
+        CurioCat <span class="text-gold">Studio</span>
+      </span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-9">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              'curio-plate text-[0.68rem] tracking-widest2 transition-colors hover:text-gold',
+              currentPath === link.href || currentPath.startsWith(link.href + '/') ? 'text-gold' : 'text-bone/60',
+            ]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <button
+      id="menu-toggle"
+      class="hamburger md:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[5px]"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="bar bar-1 block w-6 h-[1.5px] bg-bone transition-all duration-300"></span>
+      <span class="bar bar-2 block w-6 h-[1.5px] bg-bone transition-all duration-300"></span>
+      <span class="bar bar-3 block w-6 h-[1.5px] bg-bone transition-all duration-300"></span>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="md:hidden max-h-0 overflow-hidden transition-[max-height] duration-500 ease-in-out glass-nav border-t-0">
+    <ul class="flex flex-col px-6 py-6 gap-5">
+      {links.map((link) => (
+        <li>
+          <a href={link.href} class="curio-plate text-sm text-bone/80 hover:text-gold transition-colors">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<style>
+  .hamburger.is-open .bar-1 {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .hamburger.is-open .bar-2 {
+    opacity: 0;
+  }
+  .hamburger.is-open .bar-3 {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+</style>
+
+<script>
+  function initNav() {
+    const nav = document.getElementById('site-nav');
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (!nav || !toggle || !menu) return;
+
+    const onScroll = () => {
+      if (window.scrollY > 24) {
+        nav.classList.add('is-scrolled');
+      } else {
+        nav.classList.remove('is-scrolled');
+      }
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      toggle.classList.toggle('is-open', !expanded);
+      if (!expanded) {
+        menu.style.maxHeight = menu.scrollHeight + 'px';
+      } else {
+        menu.style.maxHeight = '0px';
+      }
+    });
+
+    menu.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.remove('is-open');
+        menu.style.maxHeight = '0px';
+      });
+    });
+  }
+
+  initNav();
+  document.addEventListener('astro:page-load', initNav);
+</script>

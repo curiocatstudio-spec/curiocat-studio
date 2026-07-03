@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CatLogoVideo from '../components/CatLogoVideo.astro';
+import GameCard from '../components/GameCard.astro';
+import { getCollection } from 'astro:content';
+
+const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
+const featured = games.slice(0, 3);
+---
+
+<Layout title="Home">
+  <!-- HERO -->
+  <section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 text-center bg-black">
+    <div class="grid-backdrop"></div>
+
+    <CatLogoVideo size={820} class="mb-6 fade-up" />
+
+    <p class="eyebrow fade-up" style="animation-delay: 0.15s">Game Studio &mdash; Surabaya, Indonesia</p>
+
+    <h1 class="display-headline fade-up mt-6 text-[2.6rem] sm:text-6xl md:text-7xl lg:text-8xl max-w-5xl text-bone" style="animation-delay: 0.3s">
+      We build worlds<br />worth getting <span class="text-gold">lost</span> in.
+    </h1>
+
+    <p class="fade-up mt-8 text-muted max-w-md leading-relaxed" style="animation-delay: 0.5s">
+      An independent game development studio crafting story-driven, immersive
+      experiences from concept to final polish.
+    </p>
+
+    <div class="fade-up mt-10 flex flex-col sm:flex-row gap-4" style="animation-delay: 0.65s">
+      <a href="/games" class="btn-solid">Explore Our Games</a>
+      <a href="/about" class="btn-ghost">Our Story</a>
+    </div>
+
+  </section>
+
+  <!-- STUDIO INTRO -->
+  <section class="relative py-28 px-6 border-t border-charcoal-border grain-panel">
+    <div class="max-w-3xl mx-auto text-center" data-reveal="fade">
+      <p class="eyebrow justify-center mb-6">Who We Are</p>
+      <p class="font-display text-2xl sm:text-3xl md:text-4xl leading-[1.15] tracking-tightest text-bone uppercase font-semibold">
+        CurioCat Studio is an independent game development studio based in
+        Surabaya, Indonesia.
+      </p>
+      <p class="mt-8 text-muted leading-relaxed max-w-2xl mx-auto">
+        We are passionate about crafting memorable interactive experiences through
+        compelling storytelling, immersive worlds, and thoughtful game design &mdash; from
+        concept and 3D art to programming and final polish, every project is built
+        with attention to detail and a passion for innovation.
+      </p>
+    </div>
+  </section>
+
+  <!-- FEATURED GAMES -->
+  <section class="relative py-24 px-6 border-t border-charcoal-border">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-end justify-between mb-12 flex-wrap gap-4" data-reveal="fade">
+        <div>
+          <p class="eyebrow mb-4">The Cabinet</p>
+          <h2 class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone">Featured Games</h2>
+        </div>
+        <a href="/games" class="curio-plate text-bone/70 hover:text-gold transition-colors">View All &rarr;</a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-charcoal-border">
+        {featured.map((game, i) => (
+          <GameCard
+            slug={game.slug}
+            title={game.data.title}
+            tagline={game.data.tagline}
+            genre={game.data.genre}
+            status={game.data.status}
+            cover={game.data.cover}
+            accent={game.data.accent}
+            index={i}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING STATEMENT -->
+  <section class="relative py-32 px-6 border-t border-charcoal-border overflow-hidden bg-black">
+    <div class="grid-backdrop"></div>
+    <div class="relative max-w-3xl mx-auto text-center" data-reveal="scale">
+      <p class="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-tightest font-semibold text-bone leading-[1.1]">
+        We believe every game has a story <span class="text-gold">worth experiencing.</span>
+      </p>
+      <a href="/contact" class="btn-ghost inline-flex mt-10">Let's Talk</a>
+    </div>
+  </section>
+</Layout>

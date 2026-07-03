@@ -1,0 +1,41 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'CurioCat Studio is an independent game development studio based in Surabaya, Indonesia, crafting memorable interactive experiences through storytelling, immersive worlds, and thoughtful design.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} · CurioCat Studio</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:title" content={`${title} · CurioCat Studio`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/images/logo.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="bg-void text-bone font-body antialiased">
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <script src="../scripts/reveal.js"></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const values = [
+  {
+    title: 'Storytelling First',
+    body: 'Every mechanic, room, and character exists to serve a story worth remembering. We design outward from narrative, not the other way around.',
+  },
+  {
+    title: 'Craft Over Speed',
+    body: 'From blockout to final polish, we would rather ship one detail done right than ten done fast. Every asset is built with intention.',
+  },
+  {
+    title: 'Curiosity as Method',
+    body: 'The studio is named after it for a reason. We follow strange questions into strange places, and let that curiosity shape what we build.',
+  },
+];
+
+const disciplines = [
+  'Environment Art',
+  'Hard Surface Modeling',
+  'Character Modeling & Animation',
+  'Texturing (Substance 3D Painter)',
+  'Gameplay Programming (Unity)',
+  'Narrative & Level Design',
+];
+---
+
+<Layout title="About" description="CurioCat Studio is an independent game development studio based in Surabaya, Indonesia. Learn about our values, our craft, and the way we build games.">
+  <section class="relative pt-40 pb-20 px-6 border-b border-charcoal-border overflow-hidden">
+    <div class="grid-backdrop"></div>
+    <div class="relative max-w-3xl mx-auto" data-reveal="fade">
+      <p class="eyebrow mb-4">About the Studio</p>
+      <h1 class="font-display text-4xl md:text-6xl uppercase tracking-tightest font-semibold text-bone leading-tight">
+        Independent by choice. <span class="text-gold">Curious by nature.</span>
+      </h1>
+      <p class="mt-6 text-lg text-muted leading-relaxed max-w-xl">
+        CurioCat Studio is an independent game development studio based in Surabaya, Indonesia.
+        We are passionate about crafting memorable interactive experiences through compelling
+        storytelling, immersive worlds, and thoughtful game design.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 px-6 border-b border-charcoal-border grain-panel">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div data-reveal="left">
+        <img
+          src="/images/studio-surabaya.jpg"
+          alt="CurioCat Studio, Surabaya"
+          class="w-full border border-charcoal-border"
+        />
+      </div>
+      <div data-reveal="right">
+        <p class="eyebrow mb-4">How We Work</p>
+        <p class="text-bone/90 leading-relaxed mb-5">
+          We develop original games across multiple genres while focusing on creativity, quality,
+          and meaningful player experiences.
+        </p>
+        <p class="text-muted leading-relaxed">
+          From concept and 3D art to programming and final polish, every project is built with
+          attention to detail and a passion for innovation. Small team, tight feedback loops, and
+          no detail considered too small to matter.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 px-6 border-b border-charcoal-border">
+    <div class="max-w-6xl mx-auto">
+      <p class="eyebrow justify-center mb-3" data-reveal="fade">What We Believe</p>
+      <h2 class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone text-center mb-14" data-reveal="fade">Our Values</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {values.map((v, i) => (
+          <div
+            class="p-8 border border-charcoal-border panel"
+            data-reveal="scale"
+            style={`--delay:${i * 100}ms`}
+          >
+            <h3 class="font-display text-xl text-gold mb-3">{v.title}</h3>
+            <p class="text-sm text-muted leading-relaxed">{v.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="eyebrow mb-3" data-reveal="fade">What We Do</p>
+      <h2 class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone mb-12" data-reveal="fade">Disciplines Under One Roof</h2>
+      <div class="flex flex-wrap justify-center gap-3" data-reveal="fade">
+        {disciplines.map((d) => (
+          <span class="curio-plate px-4 py-2 border border-charcoal-border text-bone/70">
+            {d}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
