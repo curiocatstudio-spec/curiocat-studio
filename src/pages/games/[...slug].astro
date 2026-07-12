@@ -109,12 +109,13 @@ const accentClass = game.data.accent === 'crimson' ? 'text-crimson-bright' : 'te
         {
   game.data.trailer ? (
     <iframe
-      class="w-full h-full"
-      src={`https://www.youtube.com/embed/${game.data.trailer.youtube.split("v=")[1]}`}
-      title={`${game.data.title} Trailer`}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
+  class="w-full h-full rounded-lg"
+  src={`https://www.youtube.com/embed/${game.data.trailer.youtube}`}
+  title={`${game.data.title} Trailer`}
+  referrerpolicy="strict-origin-when-cross-origin"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
   ) : (
     <div class="w-full h-full flex flex-col items-center justify-center gap-3">
       <img

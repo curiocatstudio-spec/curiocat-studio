@@ -15,7 +15,7 @@ itchUrl: "https://curiocatstudio.itch.io/unsent-letter"
 cover: "/images/games/unsent-letter-cover.png"
 
 trailer:
-  youtube: "https://youtu.be/3cSzfXkoWb0?si=NkfQvNmlJmY0-83O"
+  youtube: "3cSzfXkoWb0"
   poster: "/images/games/unsent-letter-trailer-cover.png"
 
 gallery:
