@@ -41,7 +41,51 @@ const accentClass = game.data.accent === 'crimson' ? 'text-crimson-bright' : 'te
           <p class="text-bone/80">{game.data.engine}</p>
         </div>
       </div>
-    </div>
+<div class="mt-8 flex flex-wrap gap-4">
+
+  <!-- Play -->
+  {
+  game.data.status === "released" ? (
+
+    <a
+      href={game.data.itchUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-md bg-crimson-bright text-white font-semibold uppercase tracking-wider transition-all duration-300 hover:scale-105 hover:shadow-lg"
+    >
+      Play on itch.io
+    </a>
+
+  ) : game.data.status === "in-development" ? (
+
+    <button
+      disabled
+      class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-md bg-zinc-700 text-zinc-300 font-semibold uppercase tracking-wider cursor-not-allowed opacity-70"
+    >
+      Coming Soon
+    </button>
+
+  ) : (
+
+    <button
+      disabled
+      class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-md bg-zinc-800 text-zinc-400 font-semibold uppercase tracking-wider cursor-not-allowed opacity-60"
+    >
+      Concept
+    </button>
+
+  )
+}
+
+  <!-- Trailer -->
+  <a
+    href="#trailer"
+    class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-md border border-charcoal-border bg-charcoal hover:bg-charcoal-border text-bone font-semibold uppercase tracking-wider transition-all duration-300"
+  >
+    ▶ Watch Trailer
+  </a>
+
+</div>
   </section>
 
   <!-- HERO COVER -->
@@ -58,26 +102,39 @@ const accentClass = game.data.accent === 'crimson' ? 'text-crimson-bright' : 'te
 </section>
 
   <!-- TRAILER -->
-  <section class="py-16 px-6 border-b border-charcoal-border">
+  <section id="trailer" class="py-16 px-6 border-b border-charcoal-border">
     <div class="max-w-4xl mx-auto" data-reveal="scale">
       <p class="eyebrow mb-4">Trailer</p>
       <div class="relative aspect-video overflow-hidden border border-charcoal-border bg-charcoal grain-panel">
-        {game.data.trailerUrl ? (
-          <video controls class="w-full h-full object-cover" poster={game.data.cover}>
-            <source src={game.data.trailerUrl} type="video/mp4" />
-          </video>
-        ) : (
-          <div class="w-full h-full flex flex-col items-center justify-center gap-3">
-            <img src={game.data.cover} alt={`${game.data.title} placeholder`} class="absolute inset-0 w-full h-full object-cover opacity-30" />
-            <div class="relative z-10 flex flex-col items-center gap-3 text-center px-6">
-              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" class="text-gold">
-                <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.4" />
-                <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor" />
-              </svg>
-              <p class="curio-plate text-muted">Trailer coming soon</p>
-            </div>
-          </div>
-        )}
+        {
+  game.data.trailer ? (
+    <iframe
+      class="w-full h-full"
+      src={`https://www.youtube.com/embed/${game.data.trailer.youtube.split("v=")[1]}`}
+      title={`${game.data.title} Trailer`}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  ) : (
+    <div class="w-full h-full flex flex-col items-center justify-center gap-3">
+      <img
+        src={game.data.cover}
+        alt={`${game.data.title} placeholder`}
+        class="absolute inset-0 w-full h-full object-cover opacity-30"
+      />
+      <div class="relative z-10 flex flex-col items-center gap-3 text-center px-6">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" class="text-gold">
+          <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.4" />
+          <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor" />
+        </svg>
+
+        <p class="curio-plate text-muted">
+          Trailer coming soon
+        </p>
+      </div>
+    </div>
+  )
+}
       </div>
     </div>
   </section>

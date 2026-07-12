@@ -10,10 +10,12 @@ platform: "PC (Windows)"
 
 engine: "Unity"
 
+itchUrl: "https://curiocatstudio.itch.io/unsent-letter"
+
 cover: "/images/games/unsent-letter-cover.png"
 
 trailer:
-  youtube: "https://www.youtube.com/watch?v=XXXXXXXX"
+  youtube: "https://youtu.be/3cSzfXkoWb0?si=NkfQvNmlJmY0-83O"
   poster: "/images/games/unsent-letter-trailer-cover.png"
 
 gallery:

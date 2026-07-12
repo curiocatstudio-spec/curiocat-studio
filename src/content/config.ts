@@ -10,7 +10,15 @@ const games = defineCollection({
     platform: z.string(),
     engine: z.string(),
     cover: z.string(),
-    trailerUrl: z.string().optional(),
+
+    trailer: z.object({
+  youtube: z.string(),
+  poster: z.string(),
+}).optional(),
+
+    // Tambahkan ini
+    itchUrl: z.string().url().optional(),
+
     gallery: z.array(z.string()).default([]),
     order: z.number().default(99),
     accent: z.enum(['gold', 'crimson']).default('gold'),
