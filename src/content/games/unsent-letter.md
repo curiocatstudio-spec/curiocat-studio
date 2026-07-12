@@ -19,28 +19,41 @@ trailer:
   poster: "/images/games/unsent-letter-trailer-cover.png"
 
 gallery:
-  - "/images/games/unsent-letter-shot-1.jpg"
-  - "/images/games/unsent-letter-shot-2.jpg"
-  - "/images/games/unsent-letter-shot-3.jpg"
-  - "/images/games/unsent-letter-shot-4.jpg"
+  - "/images/games/UL1.png"
+  - "/images/games/UL2.png"
+  - "/images/games/UL3.png"
+  - "/images/games/UL4.png"
 
 order: 1
 
 accent: "crimson"
 ---
 
-**Unsent Letter** is a first-person psychological horror game about a letter that was never delivered, and the house that refuses to let it go.
+*Unsent Letter* is a psychological narrative adventure game that takes players on a journey through a silent, mysterious dream world.
 
-You play as someone who inadvertently enters the premises to tidy up the place. What begins as a quiet, mundane job—sorting and reading old letters—slowly transforms into something else as unspoken words begin to demand to be read.
+You play as a nameless figure, appearing only as a black silhouette wearing a mask marked with a question mark. With no knowledge of your identity or how you arrived there, you wake up in a world that feels alien yet constantly beckons you to seek answers.
 
-The game leans on slow-burn atmosphere over jump scares: environmental storytelling, restrained sound design, and a house that seems to remember more than the people who lived in it. Every room holds a fragment of a story the player has to piece together themselves.
+Along the way, you discover an old, seemingly long-abandoned mail office. Yet, the letters stored within are no ordinary correspondence. Each one holds a story, a regret, or a hope that never reached its intended recipient—all linked to the families of victims from a tragic train accident.
+
+As you read more letters, the boundary between dream and reality begins to blur. Fragments of memories that are not your own slowly come to light, raising a far greater question: why are you in this world, and what is your connection to all these untold stories?
 
 ## Design pillars
 
-- **Silence as pressure.** Most of the horror comes from what isn't said — empty rooms, half-finished sentences, sounds just outside what you can explain.
-- **Environmental narrative.** No exposition dumps. The story is told through objects, letters, and the state a room was left in.
-- **A house that answers back.** Interactions with the environment subtly shift depending on how thoroughly the player has explored — the house reacts to being understood.
+- Silence as Pressure
 
+Fear grows in the quiet. Long moments of silence, distant echoes, and abandoned spaces create tension without relying on constant threats. What remains unsaid is often more frightening than what is revealed.
+
+- Environmental Storytelling
+
+Every room tells a story. Instead of lengthy dialogue or exposition, players uncover the narrative through forgotten letters, personal belongings, photographs, and the traces left behind by families affected by a tragic train accident.
+
+- Dreams That Remember
+
+The dream world is alive. As players uncover more memories and read more letters, the environment subtly changes—revealing new paths, altering familiar places, and responding to the truth being uncovered. The deeper you understand the past, the more the dream begins to understand you.
 ## Current status
 
-*Unsent Letter* is in active development. This page is a placeholder — swap in a real trailer link and screenshots as production assets become available.
+Unsent Letter is in the final stage of development and is scheduled to release on 18 July 2026.
+
+The team is currently polishing gameplay, refining environmental storytelling, and ensuring every detail supports the game's atmospheric experience. The full release will feature the complete narrative, original environments, and immersive exploration that define the journey through the dream world.
+
+Thank you for following our development. We look forward to sharing Unsent Letter with you on launch day.
