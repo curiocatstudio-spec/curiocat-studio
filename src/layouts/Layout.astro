@@ -20,15 +20,38 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
+
+    <meta 
+    name="google-site-verification" 
+    content="9m4bJFNCQQhlMti1-cSZFkEA6aecCf23VCL2Ieev-Ys" />
+
     <title>{title} · CurioCat Studio</title>
     <meta name="description" content={description} />
+
+    <meta name="author" content="CurioCat Studio" />
+    <meta name="application-name" content="CurioCat Studio" />
+    <meta name="theme-color" content="#111111" />
 
     <meta property="og:title" content={`${title} · CurioCat Studio`} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/images/logo.png" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CurioCat Studio" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CurioCat Studio",
+  "url": "https://curiocat-studio.vercel.app",
+  "logo": "https://curiocat-studio.vercel.app/images/logo.png",
+  "description": "CurioCat Studio is an independent game development studio creating story-driven experiences.",
+  "sameAs": [
+    "https://www.youtube.com/@CurioCatStudio"
+  ]
+})} />
   </head>
   <body class="bg-void text-bone font-body antialiased">
     <Navbar />
