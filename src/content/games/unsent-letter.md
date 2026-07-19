@@ -4,13 +4,13 @@ tagline: "Some words should have arrived sooner."
 
 genre: "Psychological Horror"
 
-status: "in-development"
+status: "released"
 
 platform: "PC (Windows)"
 
 engine: "Unity"
 
-itchUrl: "https://curiocatstudio.itch.io/unsent-letter"
+itchUrl: "https://curiocat-studio.itch.io/unsent-letterembed"
 
 cover: "/images/games/unsent-letter-cover.png"
 
