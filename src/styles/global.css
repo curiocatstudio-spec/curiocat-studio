@@ -35,6 +35,24 @@ body {
   position: relative;
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: -30px;
+
+  background-image: url("/images/BG.png");
+  background-size: cover;
+  background-position: center;
+
+  filter: blur(12px);
+  transform: scale(1.05);
+
+  opacity: 0.25;
+
+  z-index: -2;
+  pointer-events: none;
+}
+
 body::before {
   content: '';
   position: fixed;
@@ -782,3 +800,4 @@ textarea:focus-visible {
     user-select:none;
     pointer-events:none;
 }
+
