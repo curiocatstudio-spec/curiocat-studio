@@ -361,9 +361,13 @@ textarea:focus-visible {
 =========================================== */
 
 #journal-slider{
-    position:relative;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.08);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.08);
+
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .journal-track{
@@ -373,9 +377,21 @@ textarea:focus-visible {
 
 .journal-slide{
     min-width:100%;
-    position:relative;
     aspect-ratio:16/9;
-    overflow:hidden;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .journal-slide{
+        flex-basis: 50%;
+    }
+}
+
+/* Laptop */
+@media (min-width: 1024px) {
+    .journal-slide{
+        flex-basis: 33.333%;
+    }
 }
 
 .journal-slide img{
@@ -416,11 +432,19 @@ textarea:focus-visible {
 
 .journal-text{
 
-    padding:40px;
+    padding:24px;
 
     transform:translateY(20px);
 
     transition:.4s;
+}
+
+@media (min-width:768px){
+
+    .journal-text{
+        padding:40px;
+    }
+
 }
 
 .journal-slide:hover .journal-text{
@@ -429,7 +453,7 @@ textarea:focus-visible {
 
 .journal-text h3{
 
-    font-size:2rem;
+    font-size:1.4rem;
 
     font-family:'Archivo',sans-serif;
 
@@ -438,6 +462,14 @@ textarea:focus-visible {
     color:white;
 
     text-transform:uppercase;
+}
+
+@media (min-width:768px){
+
+    .journal-text h3{
+        font-size:2rem;
+    }
+
 }
 
 .journal-text span{
@@ -486,6 +518,14 @@ textarea:focus-visible {
     z-index:5;
 
     opacity:0;
+}
+
+@media (max-width:767px){
+
+    .journal-arrow{
+        display:none;
+    }
+
 }
 
 #journal-slider:hover .journal-arrow{
