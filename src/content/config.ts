@@ -21,6 +21,7 @@ const games = defineCollection({
     // Tambahkan ini
     logo: z.string().optional(),
     banner: z.string().optional(),
+    storyBackground: z.string().optional(),
 
     trailer: z.object({
       youtube: z.string(),

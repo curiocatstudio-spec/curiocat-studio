@@ -592,11 +592,11 @@ textarea:focus-visible {
 
     background-position:center;
 
-    filter:blur(40px);
+    filter:blur(12px);
 
     transform:scale(1.15);
 
-    opacity:.12;
+    opacity:.18;
 
     z-index:-2;
 
@@ -622,17 +622,17 @@ textarea:focus-visible {
 
 /* Background tekstur */
 .story-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+    content: "";
+    position: absolute;
+    inset: 0;
 
-  background-image: url("/images/hero/hero3.jpeg");
-  background-repeat: repeat;
-  background-size: 500px;
+    background-image: var(--story-bg);
+    background-repeat: repeat;
+    background-size: 500px;
 
-  opacity: 0.18;
+    opacity: 0.58;
 
-  z-index: 0;
+    z-index: 0;
 }
 
 /* Overlay gelap supaya tulisan tetap terbaca */

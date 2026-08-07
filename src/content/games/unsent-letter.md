@@ -16,6 +16,8 @@ cover: "/images/games/unsent-letter-cover.png"
 
 logo: "/images/games/coba.png"
 
+storyBackground: "/images/hero/hero3.jpeg"
+
 banner: "/images/games/B.png"
 
 trailer:

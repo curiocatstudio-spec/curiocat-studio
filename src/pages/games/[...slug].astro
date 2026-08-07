@@ -385,7 +385,10 @@ document.addEventListener("DOMContentLoaded", () => {
 )}
 
   <!-- CONTENT -->
-<section class="story-section py-16 px-6">
+<section
+  class="story-section py-16 px-6"
+  style={`--story-bg: url("${game.data.storyBackground}");`}
+>
   <article
     class="max-w-2xl mx-auto prose-cc relative z-10"
     data-reveal="fade"
