@@ -4,8 +4,14 @@ import CatLogoVideo from '../components/CatLogoVideo.astro';
 import GameCard from '../components/GameCard.astro';
 import { getCollection } from 'astro:content';
 
+
+
 const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
 const featured = games.slice(0, 1);
+
+const latestPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 
 
 ---
@@ -31,61 +37,106 @@ const featured = games.slice(0, 1);
   class="relative z-20 mb-6 fade-up"
 />
 
+<div class="scroll-indicator">
+  <a href="#games" aria-label="Scroll Down">
+    ↓
+  </a>
+</div>
+
   <p class="eyebrow fade-up" style="animation-delay: 0.15s">
     Game Studio &mdash; Surabaya, Indonesia
   </p>
 
   ...
 
-  <div class="fade-up mt-10 flex flex-col sm:flex-row gap-4">
-    ...
-  </div>
+  
 
 </div>
 
     <h1 class="display-headline fade-up mt-6 text-[2.6rem] sm:text-6xl md:text-7xl lg:text-8xl max-w-5xl text-bone" style="animation-delay: 0.3s">
-  We turn <span class="text-gold">simple ideas</span><br />
-  into unforgettable games.
+  Creating <span class="text-gold">Stories</span><br />
+  That Stay With You.
 </h1>
 
 <p class="fade-up mt-8 text-muted max-w-md leading-relaxed" style="animation-delay: 0.5s">
-  CurioCat Studio is an independent game development studio dedicated to
-  transforming simple ideas into memorable games that spark curiosity,
-  inspire imagination, and leave lasting experiences.
+  CurioCat Studio is an indie game studio dedicated to creating immersive worlds and emotional stories that players will remember long after the credits roll.
 </p>
 
 
     <div class="fade-up mt-10 flex flex-col sm:flex-row gap-4" style="animation-delay: 0.65s">
       <a href="/games" class="btn-solid">Explore Our Games</a>
       <a href="/about" class="btn-ghost">Our Story</a>
-    </div>
+    
+</div>
+    
 
   </section>
 
-  <!-- STUDIO INTRO -->
-  <section class="relative py-28 px-6 border-t border-charcoal-border grain-panel">
-    <div class="max-w-3xl mx-auto text-center" data-reveal="fade">
-      <p class="eyebrow justify-center mb-6">Who We Are</p>
-      <p class="font-display text-2xl sm:text-3xl md:text-4xl leading-[1.15] tracking-tightest text-bone uppercase font-semibold">
-        CurioCat Studio is an independent game development studio based in
-        Surabaya, Indonesia.
-      </p>
-      <p class="mt-8 text-muted leading-relaxed max-w-2xl mx-auto">
-        We believe every memorable game starts with a simple idea.
+  <!-- DEVELOPMENT JOURNAL -->
 
-At CurioCat Studio, our mission is to transform simple ideas into unforgettable games that spark curiosity, inspire imagination, and leave players with meaningful experiences.
+<section class="relative py-28 px-6 border-t border-charcoal-border grain-panel">
 
-From concept and game design to 3D art, programming, and polish, every project is crafted with creativity, attention to detail, and a genuine passion for making games people will remember.
-      </p>
+  <div class="max-w-6xl mx-auto">
+
+
+
+    <div id="journal-slider">
+
+      <button class="journal-arrow prev">
+        &#10094;
+      </button>
+
+      <div class="journal-track">
+
+        {latestPosts.map((post) => (
+
+          <a
+            href={`/blog/${post.slug}`}
+            class="journal-slide group"
+          >
+
+            <img
+              src={post.data.cover}
+              alt={post.data.title}
+            />
+
+            <div class="journal-overlay">
+
+              <div class="journal-text">
+
+                <h3>
+                  {post.data.title}
+                </h3>
+
+                <span>
+                  Read Story →
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+        ))}
+
+      </div>
+
+      <button class="journal-arrow next">
+        &#10095;
+      </button>
+
     </div>
-  </section>
+
+    <div class="journal-dots"></div>
+
+  </div>
 
   <!-- FEATURED GAMES -->
   <section class="relative py-24 px-6 border-t border-charcoal-border">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-end justify-between mb-12 flex-wrap gap-4" data-reveal="fade">
         <div>
-          <p class="eyebrow mb-4">The Cabinet</p>
           <h2 class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone">Featured Games</h2>
         </div>
         <a href="/games" class="curio-plate text-bone/70 hover:text-gold transition-colors">View All &rarr;</a>
@@ -106,7 +157,7 @@ From concept and game design to 3D art, programming, and polish, every project i
       ))}
     </div>
     </div>
-  </section>
+  
 
   <!-- CLOSING STATEMENT -->
   <section class="relative py-32 px-6 border-t border-charcoal-border overflow-hidden bg-black">
@@ -119,6 +170,7 @@ Great games begin with CurioCat. <span class="text-gold">worth experiencing.</sp
       <a href="/contact" class="btn-ghost inline-flex mt-10">Let's Talk</a>
     </div>
   </section>
+
 
   <script>
 const images = [
@@ -137,5 +189,28 @@ setInterval(() => {
 
   hero.style.backgroundImage = `url(${images[index]})`;
 }, 5000);
+
+/* ===== Development Journal Slider ===== */
+
+const slides = document.querySelectorAll(".journal-slide");
+
+let currentSlide = 0;
+
+// tampilkan slide pertama
+slides[currentSlide].classList.add("active");
+
+setInterval(() => {
+
+  slides[currentSlide].classList.remove("active");
+
+  currentSlide++;
+
+  if(currentSlide >= slides.length){
+    currentSlide = 0;
+  }
+
+  slides[currentSlide].classList.add("active");
+
+},5000);
 </script>
-</Layout>
+</Layout> 

@@ -14,6 +14,10 @@ itchUrl: "https://curiocat-studio.itch.io/unsent-letterembed"
 
 cover: "/images/games/unsent-letter-cover.png"
 
+logo: "/images/games/coba.png"
+
+banner: "/images/games/B.png"
+
 trailer:
   youtube: "3cSzfXkoWb0"
   poster: "/images/games/unsent-letter-trailer-cover.png"
@@ -23,6 +27,8 @@ gallery:
   - "/images/games/UL2.png"
   - "/images/games/UL3.png"
   - "/images/games/UL4.png"
+  - "/images/games/UL5.png"
+  - "/images/games/UL6.png"
 
 order: 1
 

@@ -4,7 +4,7 @@ excerpt: "Perjalanan awal CurioCat Studio dan alasan kami mulai membuat game."
 date: 2026-07-02
 author: "CurioCat Studio"
 tag: "Studio Notes"
-cover: "/images/blog/logo.png"
+cover: "/images/blog/darisby.png"
 ---
 
 # Membangun Studio Indie dari Surabaya

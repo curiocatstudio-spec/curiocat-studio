@@ -6,22 +6,37 @@ const games = defineCollection({
     title: z.string(),
     tagline: z.string(),
     genre: z.string(),
-    status: z.enum(['released', 'in-development', 'concept']),
+
+    status: z.enum([
+      'released',
+      'in-development',
+      'concept',
+    ]),
+
     platform: z.string(),
     engine: z.string(),
+
     cover: z.string(),
 
-    trailer: z.object({
-  youtube: z.string(),
-  poster: z.string(),
-}).optional(),
-
     // Tambahkan ini
+    logo: z.string().optional(),
+    banner: z.string().optional(),
+
+    trailer: z.object({
+      youtube: z.string(),
+      poster: z.string(),
+    }).optional(),
+
     itchUrl: z.string().url().optional(),
 
     gallery: z.array(z.string()).default([]),
+
     order: z.number().default(99),
-    accent: z.enum(['gold', 'crimson']).default('gold'),
+
+    accent: z.enum([
+      'gold',
+      'crimson',
+    ]).default('gold'),
   }),
 });
 
@@ -37,4 +52,7 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { games, blog };
+export const collections = {
+  games,
+  blog,
+};
