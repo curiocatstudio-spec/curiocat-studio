@@ -1,14 +1,18 @@
 ---
 title: "Unsent Letter"
-tagline: "Some words should have arrived sooner."
+tagline: "Some letters are never meant to be delivered."
 
 genre: "Psychological Horror"
 
 status: "released"
 
-platform: "PC (Windows)"
+platform:
+  name: "Windows"
+  logo: "/images/logo_windows-removebg-preview.png"
 
-engine: "Unity"
+engine:
+  name: "Unity"
+  logo: "/images/U_Cube_1C_White.png"
 
 itchUrl: "https://curiocat-studio.itch.io/unsent-letterembed"
 
@@ -31,6 +35,13 @@ gallery:
   - "/images/games/UL4.png"
   - "/images/games/UL5.png"
   - "/images/games/UL6.png"
+
+characters:
+  - name: "Unknow"
+    image: "/images/karakter unsent letter(1).png"
+
+  - name: ""
+    image: "/images/2(1).png"
 
 order: 1
 

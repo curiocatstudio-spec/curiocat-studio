@@ -135,29 +135,48 @@ document.addEventListener("DOMContentLoaded", () => {
     </p>
 
     <!-- Platform & Engine -->
-    <div class="flex flex-wrap gap-4 sm:gap-8 mt-5 sm:mt-8 text-xs sm:text-sm">
+    <div class="flex flex-wrap gap-6 sm:gap-10 mt-5 sm:mt-8 text-xs sm:text-sm">
 
-      <div>
-        <p class="curio-plate text-muted mb-1">
-          Platform
-        </p>
+  <!-- PLATFORM -->
+  <div>
+    <p class="curio-plate text-muted mb-2">
+      Platform
+    </p>
 
-        <p class="text-bone/80">
-          {game.data.platform}
-        </p>
-      </div>
+    <div class="flex items-center gap-2">
+      <img
+        src={game.data.platform.logo}
+        alt={game.data.platform.name}
+        class="platform-icon"
+      />
 
-      <div>
-        <p class="curio-plate text-muted mb-1">
-          Engine
-        </p>
-
-        <p class="text-bone/80">
-          {game.data.engine}
-        </p>
-      </div>
-
+      <p class="text-bone/80">
+        {game.data.platform.name}
+      </p>
     </div>
+  </div>
+
+
+  <!-- ENGINE -->
+  <div>
+    <p class="curio-plate text-muted mb-2">
+      Engine
+    </p>
+
+    <div class="flex items-center gap-2">
+      <img
+        src={game.data.engine.logo}
+        alt={game.data.engine.name}
+        class="engine-icon"
+      />
+
+      <p class="text-bone/80">
+        {game.data.engine.name}
+      </p>
+    </div>
+  </div>
+
+</div>
 
     <!-- Tombol -->
     <div class="flex flex-wrap gap-2 sm:gap-3 lg:gap-4 mt-5 sm:mt-8">
@@ -384,17 +403,47 @@ document.addEventListener("DOMContentLoaded", () => {
 </section>
 )}
 
-  <!-- CONTENT -->
+ <!-- CONTENT -->
 <section
   class="story-section py-16 px-6"
   style={`--story-bg: url("${game.data.storyBackground}");`}
 >
-  <article
-    class="max-w-2xl mx-auto prose-cc relative z-10"
-    data-reveal="fade"
-  >
-    <Content />
-  </article>
+  <div class="story-layout max-w-6xl mx-auto relative z-10">
+
+    <!-- CHARACTERS -->
+    {game.data.characters?.length > 0 && (
+      <aside class="character-column">
+
+        {game.data.characters.map((character) => (
+          <div class="character-card" data-reveal="fade">
+            
+            <div class="character-image">
+              <img
+                src={character.image}
+                alt={character.name}
+                loading="lazy"
+              />
+            </div>
+
+            <p class="character-name">
+              {character.name}
+            </p>
+
+          </div>
+        ))}
+
+      </aside>
+    )}
+
+    <!-- STORY -->
+    <article
+      class="story-content prose-cc"
+      data-reveal="fade"
+    >
+      <Content />
+    </article>
+
+  </div>
 </section>
 
   

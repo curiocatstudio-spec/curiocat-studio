@@ -378,226 +378,200 @@ textarea:focus-visible {
    DEVELOPMENT JOURNAL SLIDER
 =========================================== */
 
-#journal-slider{
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.08);
+#journal-slider {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
 
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.journal-track{
-    display:flex;
-    transition:transform .8s cubic-bezier(.77,0,.18,1);
+.journal-track {
+  display: flex;
+  transition: transform .8s cubic-bezier(.77,0,.18,1);
+  will-change: transform;
 }
 
-.journal-slide{
-    min-width:100%;
-    aspect-ratio:16/9;
+.journal-slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.journal-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .8s ease;
 }
 
-/* Tablet */
+.journal-slide:hover img {
+  transform: scale(1.05);
+}
+
+.journal-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.8),
+    rgba(0,0,0,.15),
+    transparent
+  );
+
+  opacity: 0;
+  transition: .4s;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.journal-slide:hover .journal-overlay {
+  opacity: 1;
+}
+
+.journal-text {
+  padding: 24px;
+
+  transform: translateY(20px);
+  transition: .4s;
+}
+
 @media (min-width: 768px) {
-    .journal-slide{
-        flex-basis: 50%;
-    }
+  .journal-text {
+    padding: 40px;
+  }
 }
 
-/* Laptop */
-@media (min-width: 1024px) {
-    .journal-slide{
-        flex-basis: 33.333%;
-    }
+.journal-slide:hover .journal-text {
+  transform: translateY(0);
 }
 
-.journal-slide img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:transform .8s ease;
-    display:block;
+.journal-text h3 {
+  font-size: 1.4rem;
+
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+
+  color: white;
+  text-transform: uppercase;
 }
 
-.journal-slide:hover img{
-    transform:scale(1.05);
+@media (min-width: 768px) {
+  .journal-text h3 {
+    font-size: 2rem;
+  }
 }
 
-.journal-overlay{
+.journal-text span {
+  display: inline-block;
 
-    position:absolute;
-    inset:0;
+  margin-top: 12px;
 
-    background:linear-gradient(
-        to top,
-        rgba(0,0,0,.8),
-        rgba(0,0,0,.15),
-        transparent
-    );
+  color: #C9A15A;
 
-    opacity:0;
-
-    transition:.4s;
-
-    display:flex;
-    align-items:flex-end;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  font-size: .8rem;
 }
 
-.journal-slide:hover .journal-overlay{
-    opacity:1;
+
+/* ===========================================
+   PANAH
+=========================================== */
+
+.journal-arrow {
+  position: absolute;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 56px;
+  height: 56px;
+
+  border: none;
+
+  background: rgba(0,0,0,.35);
+  color: white;
+
+  font-size: 1.8rem;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(8px);
+
+  transition: .3s;
+
+  z-index: 5;
+
+  opacity: 0;
 }
 
-.journal-text{
-
-    padding:24px;
-
-    transform:translateY(20px);
-
-    transition:.4s;
+@media (max-width: 767px) {
+  .journal-arrow {
+    display: none;
+  }
 }
 
-@media (min-width:768px){
-
-    .journal-text{
-        padding:40px;
-    }
-
+#journal-slider:hover .journal-arrow {
+  opacity: 1;
 }
 
-.journal-slide:hover .journal-text{
-    transform:translateY(0);
+.journal-arrow:hover {
+  background: #C9A15A;
+  color: black;
 }
 
-.journal-text h3{
-
-    font-size:1.4rem;
-
-    font-family:'Archivo',sans-serif;
-
-    font-weight:700;
-
-    color:white;
-
-    text-transform:uppercase;
+.journal-arrow.prev {
+  left: 20px;
 }
 
-@media (min-width:768px){
-
-    .journal-text h3{
-        font-size:2rem;
-    }
-
+.journal-arrow.next {
+  right: 20px;
 }
 
-.journal-text span{
 
-    display:inline-block;
+/* ===========================================
+   DOT
+=========================================== */
 
-    margin-top:12px;
+.journal-dots {
+  display: flex;
 
-    color:#C9A15A;
+  justify-content: center;
 
-    letter-spacing:.15em;
+  gap: 12px;
 
-    text-transform:uppercase;
-
-    font-size:.8rem;
+  margin-top: 24px;
 }
 
-/* ========= PANAH ========= */
+.journal-dot {
+  width: 10px;
+  height: 10px;
 
-.journal-arrow{
+  padding: 0;
+  border: none;
 
-    position:absolute;
+  border-radius: 50%;
 
-    top:50%;
+  background: #555;
 
-    transform:translateY(-50%);
+  cursor: pointer;
 
-    width:56px;
-
-    height:56px;
-
-    border:none;
-
-    background:rgba(0,0,0,.35);
-
-    color:white;
-
-    font-size:1.8rem;
-
-    cursor:pointer;
-
-    backdrop-filter:blur(8px);
-
-    transition:.3s;
-
-    z-index:5;
-
-    opacity:0;
+  transition: .3s;
 }
 
-@media (max-width:767px){
+.journal-dot.active {
+  width: 30px;
 
-    .journal-arrow{
-        display:none;
-    }
+  border-radius: 100px;
 
-}
-
-#journal-slider:hover .journal-arrow{
-    opacity:1;
-}
-
-.journal-arrow:hover{
-    background:#C9A15A;
-    color:black;
-}
-
-.prev{
-    left:20px;
-}
-
-.next{
-    right:20px;
-}
-
-/* ========= DOT ========= */
-
-.journal-dots{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:12px;
-
-    margin-top:24px;
-}
-
-.journal-dot{
-
-    width:10px;
-
-    height:10px;
-
-    border-radius:50%;
-
-    background:#555;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.journal-dot.active{
-
-    width:30px;
-
-    border-radius:100px;
-
-    background:#C9A15A;
+  background: #C9A15A;
 }
 
 .game-background{
@@ -913,3 +887,146 @@ textarea:focus-visible {
   }
 
 }
+
+/* ================================
+   STORY LAYOUT
+================================ */
+
+.story-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 70px;
+  align-items: start;
+}
+
+
+/* ================================
+   CHARACTER COLUMN
+================================ */
+
+.character-column {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  position: sticky;
+  top: 120px;
+}
+
+
+/* ================================
+   CHARACTER CARD
+================================ */
+
+.character-card {
+  text-align: center;
+}
+
+
+/* ================================
+   CHARACTER IMAGE
+================================ */
+
+.character-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.character-image img {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+.character-card:hover .character-image img {
+  transform: translateY(-6px) scale(1.03);
+}
+
+
+/* ================================
+   CHARACTER NAME
+================================ */
+
+.character-name {
+  margin: 14px 0 0;
+  font-family: var(--font-display, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #d8c7a0;
+}
+
+
+/* ================================
+   STORY CONTENT
+================================ */
+
+.story-content {
+  min-width: 0;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+  .story-layout {
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .character-image img {
+    max-width: 190px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .story-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+  }
+
+  .character-column {
+    width: 100%;
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(130px, 1fr)
+    );
+    gap: 25px;
+  }
+
+  .character-image img {
+    max-width: 160px;
+  }
+
+  .character-name {
+    font-size: 0.7rem;
+    margin-top: 10px;
+  }
+
+  .story-content {
+    width: 100%;
+  }
+}
+
+.platform-icon,
+.engine-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+

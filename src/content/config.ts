@@ -13,8 +13,15 @@ const games = defineCollection({
       'concept',
     ]),
 
-    platform: z.string(),
-    engine: z.string(),
+    platform: z.object({
+      name: z.string(),
+      logo: z.string(),
+    }),
+
+    engine: z.object({
+      name: z.string(),
+      logo: z.string(),
+    }),
 
     cover: z.string(),
 
@@ -22,6 +29,13 @@ const games = defineCollection({
     logo: z.string().optional(),
     banner: z.string().optional(),
     storyBackground: z.string().optional(),
+
+    characters: z.array(
+      z.object({
+        name: z.string(),
+        image: z.string(),
+      })
+    ).default([]),
 
     trailer: z.object({
       youtube: z.string(),

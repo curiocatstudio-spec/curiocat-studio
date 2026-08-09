@@ -223,27 +223,66 @@ setInterval(() => {
   hero.style.backgroundImage = `url(${images[index]})`;
 }, 5000);
 
+
 /* ===== Development Journal Slider ===== */
 
-const slides = document.querySelectorAll(".journal-slide");
+const journalSlider = document.querySelector("#journal-slider");
 
-let currentSlide = 0;
+  if (journalSlider) {
 
-// tampilkan slide pertama
-slides[currentSlide].classList.add("active");
+    const track = journalSlider.querySelector(".journal-track");
+    const slides = journalSlider.querySelectorAll(".journal-slide");
 
-setInterval(() => {
+    const prevButton = journalSlider.querySelector(".journal-arrow.prev");
+    const nextButton = journalSlider.querySelector(".journal-arrow.next");
 
-  slides[currentSlide].classList.remove("active");
+    let currentSlide = 0;
+    let autoSlide;
 
-  currentSlide++;
+    function updateSlider() {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
 
-  if(currentSlide >= slides.length){
-    currentSlide = 0;
+    function startAutoSlide() {
+      autoSlide = setInterval(() => {
+
+        currentSlide++;
+
+        if (currentSlide >= slides.length) {
+          currentSlide = 0;
+        }
+
+        updateSlider();
+
+      }, 5000);
+    }
+
+    nextButton.addEventListener("click", () => {
+
+      currentSlide++;
+
+      if (currentSlide >= slides.length) {
+        currentSlide = 0;
+      }
+
+      updateSlider();
+
+    });
+
+    prevButton.addEventListener("click", () => {
+
+      currentSlide--;
+
+      if (currentSlide < 0) {
+        currentSlide = slides.length - 1;
+      }
+
+      updateSlider();
+
+    });
+
+    updateSlider();
+    startAutoSlide();
   }
-
-  slides[currentSlide].classList.add("active");
-
-},5000);
 </script>
 </Layout> 
