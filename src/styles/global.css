@@ -801,3 +801,47 @@ textarea:focus-visible {
     pointer-events:none;
 }
 
+/* Kontainer utama di bawah tombol */
+.logo-partnership-container {
+  margin-top: 80px; /* Jarak dari tombol Our Story ke area logo */
+  text-align: center;
+  width: 100%;
+  max-width: 400px; /* Menyelaraskan lebar maksimal dengan tombol di atasnya */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Teks judul kecil di atas logo */
+.logo-title {
+  font-family: inherit; /* Mengikuti font web CurioCat */
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #8c8c8c; /* Warna abu-abu halus agar tidak mendominasi konten utama */
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+/* Baris tempat logo berjajar */
+.logo-row {
+  display: flex;
+  justify-content: space-between; /* Membagi jarak antar logo secara merata */
+  align-items: center;
+  gap: 15px; /* Jarak aman antar logo saat layar mengecil */
+  padding: 0 10px;
+}
+
+/* Pengaturan gambar logo */
+.partner-logo {
+  height: 110px; /* Menyamakan tinggi semua logo agar terlihat rapi */
+  width: auto;  /* Lebar otomatis menyesuaikan proporsi gambar asli */
+  object-fit: contain; /* Mencegah gambar gepeng atau tertarik ke atas */
+  opacity: 0.6; /* Efek transparan estetik khas web indie */
+  transition: opacity 0.3s ease;
+  filter: grayscale(100%); /* Membuat logo menjadi hitam-putih agar senada dengan tema web */
+}
+
+/* Efek saat kursor diarahkan ke logo */
+.partner-logo:hover {
+  opacity: 1;
+  filter: grayscale(0%); /* Mengembalikan warna asli logo saat disorot */
+}

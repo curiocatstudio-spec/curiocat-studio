@@ -18,24 +18,26 @@ const latestPosts = (await getCollection('blog'))
 
 <Layout title="Home">
   <!-- HERO -->
-  <section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 text-center bg-black">
+<section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 text-center bg-black">
 
   <div class="absolute inset-0">
-  <div
-    id="hero-background"
-    class="absolute inset-0 bg-cover bg-center transition-all duration-1000"
-    style="background-image: url('/images/hero/hero1.jpeg');">
-  </div>
+    <div
+      id="hero-background"
+      class="absolute inset-0 bg-cover bg-center transition-all duration-1000"
+      style="background-image: url('/images/hero/hero1.jpeg');">
+    </div>
 
-  <div class="absolute inset-0 bg-black/30"></div>
-</div>
+    <!-- UBAH BARIS INI: Ditambahkan kelas gradien bawaan Tailwind -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black"></div>
+  </div>
 
   <div class="grid-backdrop z-10"></div>
 
   <CatLogoVideo
-  size={820}
-  class="relative z-20 mb-6 fade-up"
-/>
+    size={820}
+    class="relative z-20 mb-6 fade-up"
+  />
+
 
 <div class="scroll-indicator">
   <a href="#games" aria-label="Scroll Down">
@@ -72,6 +74,22 @@ const latestPosts = (await getCollection('blog'))
 
   </section>
 
+
+<!-- Tambahkan Baris Logo di Bawah Ini -->
+<div class="logo-partnership-container">
+  <p class="logo-title">POWERED BY & PARTNERS</p>
+  <div class="logo-row">
+    <a href="https://blender.org" target="_blank" rel="noopener">
+      <img src="/images/blender_logo_no_socket_white.png" alt="Blender Logo" class="partner-logo">
+    </a>
+    <a href="https://unity.com" target="_blank" rel="noopener">
+      <img src="/images/Logo_T1_MadeWith_White_RGB(1).png" alt="Unity Logo" class="partner-logo">
+    </a>
+    <a href="https://itch.io" target="_blank" rel="noopener">
+      <img src="/images/itchio-logo-white.png" alt="itch.io Logo" class="partner-logo">
+    </a>
+  </div>
+</div>
   
 
   <!-- DEVELOPMENT JOURNAL -->
