@@ -801,47 +801,115 @@ textarea:focus-visible {
     pointer-events:none;
 }
 
-/* Kontainer utama di bawah tombol */
+/* ========================================
+   PARTNERSHIP / LOGOS
+======================================== */
+
 .logo-partnership-container {
-  margin-top: 80px; /* Jarak dari tombol Our Story ke area logo */
+  width: min(82vw, 1250px);
+  margin: clamp(110px, 10vw, 150px) auto 0;
+  padding-bottom: 35px;
   text-align: center;
-  width: 100%;
-  max-width: 400px; /* Menyelaraskan lebar maksimal dengan tombol di atasnya */
-  margin-left: auto;
-  margin-right: auto;
 }
 
-/* Teks judul kecil di atas logo */
+
+/* Judul kecil */
 .logo-title {
-  font-family: inherit; /* Mengikuti font web CurioCat */
+  font-family: inherit;
   font-size: 11px;
   letter-spacing: 2px;
-  color: #8c8c8c; /* Warna abu-abu halus agar tidak mendominasi konten utama */
-  margin-bottom: 15px;
+  color: #8c8c8c;
+  margin-bottom: clamp(25px, 3vw, 40px);
   text-transform: uppercase;
 }
 
-/* Baris tempat logo berjajar */
+
+/* Baris logo */
 .logo-row {
+  width: 100%;
   display: flex;
-  justify-content: space-between; /* Membagi jarak antar logo secara merata */
+  justify-content: space-between;
   align-items: center;
-  gap: 15px; /* Jarak aman antar logo saat layar mengecil */
-  padding: 0 10px;
+  gap: clamp(20px, 3vw, 50px);
 }
 
-/* Pengaturan gambar logo */
+
+/* Masing-masing area logo */
+.logo-row > a {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Logo */
 .partner-logo {
-  height: 110px; /* Menyamakan tinggi semua logo agar terlihat rapi */
-  width: auto;  /* Lebar otomatis menyesuaikan proporsi gambar asli */
-  object-fit: contain; /* Mencegah gambar gepeng atau tertarik ke atas */
-  opacity: 0.6; /* Efek transparan estetik khas web indie */
-  transition: opacity 0.3s ease;
-  filter: grayscale(100%); /* Membuat logo menjadi hitam-putih agar senada dengan tema web */
+  width: auto;
+  height: clamp(55px, 5vw, 90px);
+  max-width: 100%;
+  object-fit: contain;
+
+  opacity: 0.6;
+  filter: grayscale(100%);
+
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease;
 }
 
-/* Efek saat kursor diarahkan ke logo */
+
+/* Hover */
 .partner-logo:hover {
   opacity: 1;
-  filter: grayscale(0%); /* Mengembalikan warna asli logo saat disorot */
+  filter: grayscale(0%);
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 768px) {
+
+  .logo-partnership-container {
+    width: 88vw;
+  }
+
+  .logo-row {
+    gap: 15px;
+  }
+
+  .partner-logo {
+    height: clamp(40px, 9vw, 65px);
+  }
+
+}
+
+
+/* ========================================
+   HP
+======================================== */
+
+@media (max-width: 480px) {
+
+  .logo-partnership-container {
+    width: 90vw;
+  }
+
+  .logo-title {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+  }
+
+  .logo-row {
+    gap: 8px;
+  }
+
+  .partner-logo {
+    height: clamp(32px, 10vw, 50px);
+  }
+
 }
