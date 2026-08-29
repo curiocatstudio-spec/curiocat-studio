@@ -26,6 +26,29 @@ const disciplines = [
   'Gameplay Programming (Unity)',
   'Narrative & Level Design',
 ];
+
+const team = [
+  {
+    name: 'Muhammad Syauqi Akifur Rahman',
+    role: 'Game Developer & 3D Artist',
+    image: '/images/syauqi.jpeg',
+  },
+  {
+    name: 'Muhammad Rafli Zidan Akbari',
+    role: 'Game Designer',
+    image: '/images/team-1.jpg',
+  },
+  {
+    name: 'Riza Afif Dhafa Thaifuri',
+    role: 'Illustrator',
+    image: '/images/team-2.jpg',
+  },
+  {
+    name: 'Nasya Azalia',
+    role: 'administration',
+    image: '/images/team-3.jpg',
+  },
+];
 ---
 
 <!-- MEET THE DEVELOPER -->
@@ -58,11 +81,10 @@ const disciplines = [
       </p>
 
       <p class="text-muted leading-8 mt-6 max-w-2xl">
-        I'm the founder of CurioCat Studio and the solo developer behind Unsent Letter.
+        I'm the founder of CurioCat Studio, where I lead a small team of passionate creators dedicated to developing meaningful interactive experiences. 
 
-My work spans every stage of game development—from concept and gameplay programming to 3D environment art, lighting, UI, level design, and final polish.
+Together, we bring different skills and perspectives into every stage of development, from the initial concept to the final polish. CurioCat Studio was built on a simple belief: great games don't have to begin with complicated ideas. Through curiosity, creativity, and collaboration, we strive to transform simple concepts into memorable games that stay with players long after they finish playing.
 
-CurioCat Studio was built on a simple belief: great games don't have to begin with complicated ideas. Through curiosity, creativity, and continuous learning, I strive to transform simple concepts into memorable interactive experiences that players will remember long after they finish playing.
       </p>
 
       <!-- Skill -->
@@ -100,6 +122,59 @@ CurioCat Studio was built on a simple belief: great games don't have to begin wi
 
     </div>
 
+  </div>
+</section>
+
+<!-- OUR TEAM -->
+<section class="py-24 px-6 border-t border-charcoal-border border-b border-charcoal-border">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-14" data-reveal="fade">
+      <p class="eyebrow mb-3">The People Behind The Games</p>
+
+      <h2 class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone">
+        Our Team
+      </h2>
+
+      <p class="text-muted max-w-2xl mx-auto mt-5 leading-relaxed">
+        A small team driven by curiosity, creativity, and a passion for
+        creating memorable interactive experiences.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+
+      {team.map((member, i) => (
+        <div
+          class="group border border-charcoal-border panel p-5"
+          data-reveal="scale"
+          style={`--delay:${i * 100}ms`}
+        >
+
+          <!-- Foto -->
+          <div class="aspect-square overflow-hidden border border-charcoal-border mb-5">
+            <img
+              src={member.image}
+              alt={member.name}
+              class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+            />
+          </div>
+
+          <!-- Info -->
+          <div>
+            <h3 class="font-display text-lg text-bone">
+              {member.name}
+            </h3>
+
+            <p class="text-sm text-gold mt-2">
+              {member.role}
+            </p>
+          </div>
+
+        </div>
+      ))}
+
+    </div>
   </div>
 </section>
 
