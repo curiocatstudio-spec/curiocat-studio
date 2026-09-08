@@ -7,7 +7,7 @@ tag: "Dev Log"
 cover: "/images/Screenshot 2026-08-09 200241.png"
 ---
 
-## Di Balik Surat yang Tak Pernah Terkirim
+
 
 Setiap game selalu dimulai dari sebuah ide. Begitu juga dengan *Unsent Letter*.
 
@@ -35,9 +35,9 @@ Lingkungan tidak hanya dibuat sebagai tempat pemain berjalan, tetapi juga sebaga
 
 Tidak semuanya dijelaskan secara langsung. Sebagian harus ditemukan sendiri oleh pemain.
 
-## Menciptakan Unknow
+## Menciptakan Unknown
 
-Salah satu karakter penting dalam *Unsent Letter* adalah **Unknow**.
+Salah satu karakter penting dalam *Unsent Letter* adalah **Unknown**.
 
 Sejak awal, kami ingin membuatnya terasa misterius. Desainnya dibuat sederhana, gelap, dan minim detail. Wajahnya bahkan tidak menunjukkan identitas yang jelas, melainkan sebuah tanda tanya.
 

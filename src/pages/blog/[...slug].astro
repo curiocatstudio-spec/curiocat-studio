@@ -1,9 +1,11 @@
 ---
+
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
+
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -14,51 +16,444 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const formatDate = (d: Date) =>
-  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
 ---
 
-<Layout title={post.data.title} description={post.data.excerpt}>
-  <section class="relative pt-40 pb-16 px-6 border-b border-charcoal-border">
-    <div class="max-w-2xl mx-auto" data-reveal="fade">
-      <a href="/blog" class="curio-plate text-bone/60 hover:text-gold transition-colors">&larr; Dev Blog</a>
-      <div class="flex items-center gap-3 mt-6 mb-4">
-        <span class="curio-plate text-gold">{post.data.tag}</span>
-        <span class="text-muted text-xs">{formatDate(post.data.date)}</span>
+<Layout
+  title={post.data.title}
+  description={post.data.excerpt}
+>
+
+  <!-- HEADER -->
+
+  <section class="blog-header">
+    <div class="blog-container" data-reveal="fade">
+
+      <a
+        href="/blog"
+        class="back-link"
+      >
+        &larr; Dev Blog
+      </a>
+
+      <div class="post-meta">
+        <span class="post-tag">
+          {post.data.tag}
+        </span>
+
+        <span class="post-date">
+          {formatDate(post.data.date)}
+        </span>
       </div>
-      <h1 class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone leading-tight">{post.data.title}</h1>
-      <p class="mt-4 text-muted">By {post.data.author}</p>
+
+      <h1 class="post-title">
+        {post.data.title}
+      </h1>
+
+      <p class="post-author">
+        By {post.data.author}
+      </p>
+
     </div>
   </section>
 
-  {post.data.cover && (
-    <section class="pt-12 px-6" data-reveal="scale">
-      <div class="max-w-2xl mx-auto aspect-video overflow-hidden border border-charcoal-border">
-        <img src={post.data.cover} alt={post.data.title} class="w-full h-full object-cover" />
-      </div>
-    </section>
-  )}
 
-  <section class="py-12 px-6">
-    <article class="max-w-2xl mx-auto prose-cc" data-reveal="fade">
-      <Content />
+  <!-- COVER -->
+
+  {
+    post.data.cover && (
+      <section
+        class="cover-section"
+        data-reveal="scale"
+      >
+        <div class="cover-container">
+          <img
+            src={post.data.cover}
+            alt={post.data.title}
+            class="cover-image"
+          />
+        </div>
+      </section>
+    )
+  }
+
+
+  <!-- ARTICLE -->
+
+  <section class="article-section">
+    <article
+      class="article-content prose-cc"
+      data-reveal="fade"
+    >
+      <div style="text-align: justify;">
+        <Content />
+      </div>
     </article>
   </section>
+
 </Layout>
 
+
 <style is:global>
-  .prose-cc h2 {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.5rem;
-    color: #F2F0EA;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
+
+  /* =========================
+     BLOG CONTAINER
+  ========================= */
+
+  .blog-container,
+  .cover-container,
+  .article-content {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .prose-cc p {
-    color: #8C8A85;
-    line-height: 1.8;
+
+  .blog-container {
+    max-width: 1100px;
+  }
+
+  .cover-container {
+    max-width: 1100px;
+  }
+
+  .article-content {
+    max-width: 900px;
+  }
+
+
+  /* =========================
+     HEADER
+  ========================= */
+
+  .blog-header {
+    padding-top: 9rem;
+    padding-bottom: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    border-bottom: 1px solid var(--charcoal-border, #292724);
+  }
+
+  .back-link {
+    display: inline-block;
+
+    color: rgba(242, 240, 234, 0.6);
+
+    font-size: 0.9rem;
+
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: #c6a15b;
+    transform: translateX(-2px);
+  }
+
+
+  /* =========================
+     META
+  ========================= */
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    margin-top: 2rem;
     margin-bottom: 1.25rem;
   }
-  .prose-cc em {
-    color: #9C978C;
+
+  .post-tag {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 0.4rem 0.75rem;
+
+    border: 1px solid rgba(198, 161, 91, 0.25);
+
+    color: #c6a15b;
+
+    font-size: 0.7rem;
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
+
+  .post-date {
+    color: #77736d;
+
+    font-size: 0.8rem;
+  }
+
+
+  /* =========================
+     TITLE
+  ========================= */
+
+  .post-title {
+    max-width: 1000px;
+
+    margin: 0;
+
+    color: #f2f0ea;
+
+    font-family: Georgia, 'Times New Roman', serif;
+
+    font-size: clamp(2.2rem, 5vw, 4.5rem);
+
+    font-weight: 600;
+
+    line-height: 1.08;
+
+    letter-spacing: -0.035em;
+
+    text-transform: uppercase;
+  }
+
+  .post-author {
+    margin-top: 1.5rem;
+
+    color: #77736d;
+
+    font-size: 0.9rem;
+  }
+
+
+  /* =========================
+     COVER
+  ========================= */
+
+  .cover-section {
+    padding: 3.5rem 2rem 0;
+  }
+
+  .cover-container {
+    overflow: hidden;
+
+    border: 1px solid var(--charcoal-border, #292724);
+
+    background: #111;
+  }
+
+  .cover-image {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+  }
+
+
+  /* =========================
+     ARTICLE
+  ========================= */
+
+  .article-section {
+    padding: 4rem 2rem 7rem;
+  }
+
+  .article-content {
+    color: #8c8a85;
+
+    font-size: 1rem;
+
+    line-height: 1.85;
+  }
+
+
+  /* =========================
+     TYPOGRAPHY
+  ========================= */
+
+  .prose-cc h2 {
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
+
+    color: #f2f0ea;
+
+    font-family: Georgia, 'Times New Roman', serif;
+
+    font-size: clamp(1.5rem, 3vw, 2rem);
+
+    font-weight: 600;
+
+    line-height: 1.25;
+
+    letter-spacing: -0.02em;
+  }
+
+  .prose-cc h3 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+
+    color: #f2f0ea;
+
+    font-family: Georgia, 'Times New Roman', serif;
+
+    font-size: 1.3rem;
+
+    font-weight: 600;
+  }
+
+  .prose-cc p {
+    margin-bottom: 1.5rem;
+
+    color: #8c8a85;
+
+    line-height: 1.85;
+  }
+
+  .prose-cc em {
+    color: #9c978c;
+  }
+
+  .prose-cc strong {
+    color: #d6d1c6;
+
+    font-weight: 600;
+  }
+
+  .prose-cc a {
+    color: #c6a15b;
+
+    text-decoration: underline;
+
+    text-decoration-color:
+      rgba(198, 161, 91, 0.35);
+
+    text-underline-offset: 3px;
+
+    transition: color 0.2s ease;
+  }
+
+  .prose-cc a:hover {
+    color: #e0bd79;
+  }
+
+  .prose-cc ul,
+  .prose-cc ol {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+
+    padding-left: 1.5rem;
+  }
+
+  .prose-cc li {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-cc blockquote {
+    margin: 2rem 0;
+
+    padding: 1rem 1.5rem;
+
+    border-left: 2px solid #c6a15b;
+
+    color: #aaa59b;
+
+    font-style: italic;
+  }
+
+  .prose-cc img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    margin: 2.5rem 0;
+
+    border: 1px solid var(--charcoal-border, #292724);
+  }
+
+
+  /* =========================
+     TABLET
+  ========================= */
+
+  @media (max-width: 768px) {
+
+    .blog-header {
+      padding-top: 7.5rem;
+      padding-bottom: 3rem;
+
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .cover-section {
+      padding-top: 2.5rem;
+
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .article-section {
+      padding-top: 3rem;
+      padding-bottom: 5rem;
+
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .post-title {
+      font-size: clamp(2rem, 8vw, 3.2rem);
+    }
+
+  }
+
+
+  /* =========================
+     MOBILE
+  ========================= */
+
+  @media (max-width: 480px) {
+
+    .blog-header {
+      padding-top: 6.5rem;
+    }
+
+    .post-meta {
+      gap: 0.5rem;
+    }
+
+    .post-title {
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+
+    .post-author {
+      margin-top: 1rem;
+    }
+
+    .cover-section {
+      padding-top: 2rem;
+    }
+
+    .article-section {
+      padding-top: 2.5rem;
+    }
+
+    .article-content {
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .prose-cc h2 {
+      margin-top: 2.5rem;
+    }
+
+  }
+
 </style>

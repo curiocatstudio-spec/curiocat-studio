@@ -4,247 +4,775 @@ import CatLogoVideo from '../components/CatLogoVideo.astro';
 import GameCard from '../components/GameCard.astro';
 import { getCollection } from 'astro:content';
 
+const games = (await getCollection('games')).sort(
+  (a, b) => a.data.order - b.data.order
+);
 
-
-const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
 const featured = games.slice(0, 1);
 
 const latestPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
-
-
 ---
 
 <Layout title="Home">
-  <!-- HERO -->
-<section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 text-center bg-black">
 
-  <div class="absolute inset-0">
-    <div
-      id="hero-background"
-      class="absolute inset-0 bg-cover bg-center transition-all duration-1000"
-      style="background-image: url('/images/hero/hero1.jpeg');">
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section
+  class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pb-16 text-center bg-black"
+>
+    <!-- HERO BACKGROUND -->
+    <div class="absolute inset-0">
+      <div
+        id="hero-background"
+        class="absolute inset-0 bg-cover bg-center transition-all duration-1000"
+        style="background-image: url('/images/hero/hero1.jpeg');"
+      ></div>
+
+      <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black"></div>
     </div>
 
-    <!-- UBAH BARIS INI: Ditambahkan kelas gradien bawaan Tailwind -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black"></div>
-  </div>
+    <!-- GRID BACKDROP -->
+    <div class="grid-backdrop z-10"></div>
 
-  <div class="grid-backdrop z-10"></div>
+    <!-- =================================================
+         CAT LOGO VIDEO
+         JANGAN DIUBAH
+    ================================================== -->
+    <CatLogoVideo
+      size={820}
+      class="relative z-20 mb-6 fade-up"
+    />
 
-  <CatLogoVideo
-    size={820}
-    class="relative z-20 mb-6 fade-up"
-  />
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-indicator">
+      <a href="#games" aria-label="Scroll Down">
+        ↓
+      </a>
+    </div>
+
+    <!-- HERO CONTENT -->
+    <div class="relative z-20 flex flex-col items-center">
+
+      <p
+        class="eyebrow fade-up"
+        style="animation-delay: 0.15s"
+      >
+        Game Studio &mdash; Surabaya, Indonesia
+      </p>
+
+      <h1
+        class="display-headline fade-up mt-6 text-[2.6rem] sm:text-6xl md:text-7xl lg:text-8xl max-w-5xl text-bone"
+        style="animation-delay: 0.3s"
+      >
+        Creating <span class="text-gold">Stories</span><br />
+        That Stay With You.
+      </h1>
+
+      <p
+        class="fade-up mt-8 text-muted max-w-md leading-relaxed"
+        style="animation-delay: 0.5s"
+      >
+        CurioCat Studio is an indie game studio dedicated to creating
+        immersive worlds and emotional stories that players will remember
+        long after the credits roll.
+      </p>
+
+      <!-- HERO BUTTONS -->
+      <div
+        class="fade-up mt-10 flex flex-col sm:flex-row gap-4"
+        style="animation-delay: 0.65s"
+      >
+        <a href="/games" class="btn-solid">
+          Explore Our Games
+        </a>
+
+        <a href="/about" class="btn-ghost">
+          Our Story
+        </a>
+      </div>
+
+    </div>
+  </section>
 
 
-<div class="scroll-indicator">
-  <a href="#games" aria-label="Scroll Down">
-    ↓
-  </a>
-</div>
+  <!-- ===================================================== -->
+  <!-- POWERED BY / PARTNERS -->
+  <!-- ===================================================== -->
 
-  <p class="eyebrow fade-up" style="animation-delay: 0.15s">
-    Game Studio &mdash; Surabaya, Indonesia
-  </p>
+  <section
+    class="
+      border-t
+      border-charcoal-border
+      bg-black
+      py-12
+      sm:py-14
+      lg:py-16
+    "
+  >
 
-  ...
+    <div
+      class="
+        max-w-7xl
+        mx-auto
+        px-5
+        sm:px-8
+        lg:px-12
+        xl:px-16
+      "
+    >
 
-  
+      <div
+        class="
+          flex
+          items-center
+          justify-center
+          w-full
+        "
+      >
 
-</div>
+        
+        <div
+          class="
+            logo-row
+            flex
+            flex-wrap
+            items-center
+            justify-center
+            gap-8
+            sm:gap-10
+            lg:gap-12
+          "
+        >
 
-    <h1 class="display-headline fade-up mt-6 text-[2.6rem] sm:text-6xl md:text-7xl lg:text-8xl max-w-5xl text-bone" style="animation-delay: 0.3s">
-  Creating <span class="text-gold">Stories</span><br />
-  That Stay With You.
-</h1>
+          <a
+            href="https://blender.org"
+            target="_blank"
+            rel="noopener"
+            class="transition-opacity hover:opacity-70"
+          <!-- Blender -->
+            <img
+              src="/images/blender_logo_no_socket_white.png"
+              alt="Blender Logo"
+              class="
+                partner-logo
+                max-w-[140px]
+                sm:max-w-[170px]
+                lg:max-w-[190px]
+                h-auto
+              "
+            />
 
-<p class="fade-up mt-8 text-muted max-w-md leading-relaxed" style="animation-delay: 0.5s">
-  CurioCat Studio is an indie game studio dedicated to creating immersive worlds and emotional stories that players will remember long after the credits roll.
-</p>
+
+          <a
+            href="https://unity.com"
+            target="_blank"
+            rel="noopener"
+            class="transition-opacity hover:opacity-70"
+          <!-- Unity -->
+            <img
+              src="/images/Logo_T1_MadeWith_White_RGB(1).png"
+              alt="Unity Logo"
+              class="
+                partner-logo
+                max-w-[140px]
+                sm:max-w-[170px]
+                lg:max-w-[190px]
+                h-auto
+              "
+            />
 
 
-    <div class="fade-up mt-10 flex flex-col sm:flex-row gap-4" style="animation-delay: 0.65s">
-      <a href="/games" class="btn-solid">Explore Our Games</a>
-      <a href="/about" class="btn-ghost">Our Story</a>
-    
-</div>
-    
+          <a
+            href="https://itch.io"
+            target="_blank"
+            rel="noopener"
+            class="transition-opacity hover:opacity-70"
+          <!-- itch.io -->
+            <img
+              src="/images/itchio-logo-white.png"
+              alt="itch.io Logo"
+              class="
+                partner-logo
+                max-w-[130px]
+                sm:max-w-[160px]
+                lg:max-w-[180px]
+                h-auto
+              "
+            />
+
+        </div>
+
+      </div>
+
+    </div>
 
   </section>
 
 
-<!-- Tambahkan Baris Logo di Bawah Ini -->
-<div class="logo-partnership-container">
-  <p class="logo-title">POWERED BY & PARTNERS</p>
-  <div class="logo-row">
-    <a href="https://blender.org" target="_blank" rel="noopener">
-      <img src="/images/blender_logo_no_socket_white.png" alt="Blender Logo" class="partner-logo">
-    </a>
-    <a href="https://unity.com" target="_blank" rel="noopener">
-      <img src="/images/Logo_T1_MadeWith_White_RGB(1).png" alt="Unity Logo" class="partner-logo">
-    </a>
-    <a href="https://itch.io" target="_blank" rel="noopener">
-      <img src="/images/itchio-logo-white.png" alt="itch.io Logo" class="partner-logo">
-    </a>
-  </div>
-</div>
-  
 
+  <!-- ===================================================== -->
   <!-- DEVELOPMENT JOURNAL -->
+  <!-- ===================================================== -->
 
-<section
-class="
-relative
-py-16
-md:py-24
-lg:py-28
-px-5
-sm:px-8
-lg:px-12
-xl:px-16
-border-t
-border-charcoal-border
-grain-panel
-">
+  <section
+    id="journal"
+    class="
+      relative
+      py-16
+      sm:py-20
+      lg:py-28
+      border-t
+      border-charcoal-border
+      grain-panel
+      overflow-hidden
+    "
+  >
 
-  <div class="max-w-7xl mx-auto">
+    <div
+      class="
+        max-w-7xl
+        mx-auto
+        px-5
+        sm:px-8
+        lg:px-12
+        xl:px-16
+      "
+    >
+
+      <!-- Section Heading -->
+      <div
+        class="
+          flex
+          items-end
+          justify-between
+          gap-6
+          mb-8
+          sm:mb-10
+          lg:mb-12
+        "
+        data-reveal="fade"
+      >
+
+        <div>
+          <p class="eyebrow mb-2">
+            DEVELOPMENT JOURNAL
+          </p>
+
+          <h2
+            class="
+              font-display
+              text-3xl
+              sm:text-4xl
+              lg:text-5xl
+              uppercase
+              tracking-tightest
+              font-semibold
+              text-bone
+            "
+          >
+            Behind The Scenes
+          </h2>
+        </div>
+
+      </div>
 
 
+      <!-- Slider -->
+      <div
+        id="journal-slider"
+        class="
+          relative
+          w-full
+          overflow-hidden
+        "
+      >
 
-    <div id="journal-slider">
+        <button
+          class="
+            journal-arrow
+            prev
+            absolute
+            left-3
+            sm:left-5
+            top-1/2
+            -translate-y-1/2
+            z-20
+          "
+          aria-label="Previous story"
+        >
+          &#10094;
+        </button>
 
-      <button class="journal-arrow prev">
-        &#10094;
-      </button>
 
-      <div class="journal-track">
+        <div
+          class="
+            journal-window
+            w-full
+            overflow-hidden
+          "
+        >
 
-        {latestPosts.map((post) => (
-
-          <a
-            href={`/blog/${post.slug}`}
-            class="journal-slide group"
+          <div
+            class="
+              journal-track
+              flex
+              w-full
+              transition-transform
+              duration-700
+              ease-out
+            "
           >
 
-            <img
-              src={post.data.cover}
-              alt={post.data.title}
-            />
+            {latestPosts.map((post) => (
 
-            <div class="journal-overlay">
+              <a
+                href={`/blog/${post.slug}`}
+                class="
+                  journal-slide
+                  group
+                  relative
+                  min-w-full
+                  block
+                  overflow-hidden
+                  aspect-[16/9]
+                  sm:aspect-[2/1]
+                  lg:aspect-[2.2/1]
+                "
+              >
 
-              <div class="journal-text">
+                <img
+                  src={post.data.cover}
+                  alt={post.data.title}
+                  class="
+                    absolute
+                    inset-0
+                    w-full
+                    h-full
+                    object-cover
+                    transition-transform
+                    duration-700
+                    group-hover:scale-105
+                  "
+                />
 
-                <h3>
-                  {post.data.title}
-                </h3>
 
-                <span>
-                  Read Story →
-                </span>
+                <div
+                  class="
+                    absolute
+                    inset-0
+                    bg-gradient-to-t
+                    from-black
+                    via-black/30
+                    to-transparent
+                  "
+                ></div>
 
-              </div>
 
-            </div>
+                <div
+                  class="
+                    absolute
+                    inset-x-0
+                    bottom-0
+                    p-5
+                    sm:p-8
+                    lg:p-10
+                  "
+                >
 
-          </a>
+                  <div class="journal-text max-w-3xl">
+
+                    <h3
+                      class="
+                        text-xl
+                        sm:text-2xl
+                        lg:text-4xl
+                        font-display
+                        font-semibold
+                        text-bone
+                        leading-tight
+                      "
+                    >
+                      {post.data.title}
+                    </h3>
+
+                    <span
+                      class="
+                        inline-block
+                        mt-3
+                        text-sm
+                        sm:text-base
+                        text-bone/70
+                        transition-colors
+                        group-hover:text-gold
+                      "
+                    >
+                      Read Story →
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </a>
+
+            ))}
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="
+            journal-arrow
+            next
+            absolute
+            right-3
+            sm:right-5
+            top-1/2
+            -translate-y-1/2
+            z-20
+          "
+          aria-label="Next story"
+        >
+          &#10095;
+        </button>
+
+      </div>
+
+
+      <!-- Slider Dots -->
+      <div
+        class="
+          journal-dots
+          flex
+          justify-center
+          mt-5
+        "
+      ></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================== -->
+  <!-- FEATURED GAMES -->
+  <!-- ===================================================== -->
+
+  <section
+    class="
+      relative
+      py-16
+      sm:py-20
+      lg:py-28
+      px-0
+      border-t
+      border-charcoal-border
+    "
+  >
+
+    <div
+      class="
+        max-w-7xl
+        mx-auto
+        px-5
+        sm:px-8
+        lg:px-12
+        xl:px-16
+      "
+    >
+
+      <!-- Heading -->
+      <div
+        class="
+          flex
+          items-end
+          justify-between
+          mb-8
+          sm:mb-10
+          lg:mb-12
+          flex-wrap
+          gap-4
+        "
+        data-reveal="fade"
+      >
+
+        <div>
+
+          <p class="eyebrow mb-2">
+            OUR WORK
+          </p>
+
+          <h2
+            class="
+              font-display
+              text-3xl
+              sm:text-4xl
+              lg:text-5xl
+              uppercase
+              tracking-tightest
+              font-semibold
+              text-bone
+            "
+          >
+            Featured Games
+          </h2>
+
+        </div>
+
+
+        <a
+          href="/games"
+          class="
+            curio-plate
+            text-bone/70
+            hover:text-gold
+            transition-colors
+            text-sm
+            sm:text-base
+          "
+        >
+          View All &rarr;
+        </a>
+
+      </div>
+
+
+      <!-- Game Grid -->
+      <div
+        class="
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          gap-5
+          sm:gap-6
+          lg:gap-7
+        "
+      >
+
+        {games.map((game, i) => (
+
+          <GameCard
+            slug={game.slug}
+            title={game.data.title}
+            tagline={game.data.tagline}
+            genre={game.data.genre}
+            status={game.data.status}
+            cover={game.data.cover}
+            accent={game.data.accent}
+            index={i}
+          />
 
         ))}
 
       </div>
 
-      <button class="journal-arrow next">
-        &#10095;
-      </button>
-
     </div>
 
-    <div class="journal-dots"></div>
-
-  </div>
-
-  <!-- FEATURED GAMES -->
-  <section class="relative py-24 px-6 border-t border-charcoal-border">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex items-end justify-between mb-12 flex-wrap gap-4" data-reveal="fade">
-        <div>
-          <h2 class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone">Featured Games</h2>
-        </div>
-        <a href="/games" class="curio-plate text-bone/70 hover:text-gold transition-colors">View All &rarr;</a>
-      </div>
-
-      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {games.map((game, i) => (
-        <GameCard
-          slug={game.slug}
-          title={game.data.title}
-          tagline={game.data.tagline}
-          genre={game.data.genre}
-          status={game.data.status}
-          cover={game.data.cover}
-          accent={game.data.accent}
-          index={i}
-        />
-      ))}
-    </div>
-    </div>
-  
-
-  <!-- CLOSING STATEMENT -->
-  <section class="relative py-32 px-6 border-t border-charcoal-border overflow-hidden">
-    <div class="grid-backdrop"></div>
-    <div class="relative max-w-3xl mx-auto text-center" data-reveal="scale">
-      <p class="font-display text-3xl sm:text-4xl md:text-5xl uppercase tracking-tightest font-semibold text-bone leading-[1.1]">
-        Curiosity begins with an idea.
-Great games begin with CurioCat. <span class="text-gold">worth experiencing.</span>
-      </p>
-      <a href="/contact" class="btn-ghost inline-flex mt-10">Let's Talk</a>
-    </div>
   </section>
 
 
+
+  <!-- ===================================================== -->
+  <!-- CLOSING STATEMENT -->
+  <!-- ===================================================== -->
+
+  <section
+    class="
+      relative
+      py-24
+      sm:py-28
+      lg:py-36
+      border-t
+      border-charcoal-border
+      overflow-hidden
+    "
+  >
+
+    <div class="grid-backdrop absolute inset-0"></div>
+
+
+    <div
+      class="
+        relative
+        max-w-4xl
+        mx-auto
+        px-5
+        sm:px-8
+        lg:px-12
+        text-center
+      "
+      data-reveal="scale"
+    >
+
+      <p
+        class="
+          font-display
+          text-2xl
+          sm:text-3xl
+          md:text-4xl
+          lg:text-5xl
+          uppercase
+          tracking-tightest
+          font-semibold
+          text-bone
+          leading-[1.1]
+        "
+      >
+        Curiosity begins with an idea.
+        <br class="hidden sm:block" />
+
+        Great games begin with CurioCat.
+
+        <span class="text-gold">
+          Worth experiencing.
+        </span>
+      </p>
+
+
+      <a
+        href="/contact"
+        class="btn-ghost inline-flex mt-8 sm:mt-10"
+      >
+        Let's Talk
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ===================================================== -->
+  <!-- SCRIPTS -->
+  <!-- ===================================================== -->
+
   <script>
-const images = [
-  "/images/hero/hero1.jpeg",
-  "/images/hero/hero2.jpeg",
-  "/images/hero/hero3.jpeg",
-  "/images/hero/hero4.jpeg",
-];
 
-let index = 0;
+    /* =====================================================
+       HERO BACKGROUND SLIDESHOW
+    ===================================================== */
 
-const hero = document.getElementById("hero-background");
+    const images = [
+      "/images/hero/hero1.jpeg",
+      "/images/hero/hero2.jpeg",
+      "/images/hero/hero3.jpeg",
+      "/images/hero/hero4.jpeg",
+    ];
 
-setInterval(() => {
-  index = (index + 1) % images.length;
+    let heroIndex = 0;
 
-  hero.style.backgroundImage = `url(${images[index]})`;
-}, 5000);
+    const hero = document.getElementById("hero-background");
 
+    if (hero) {
 
-/* ===== Development Journal Slider ===== */
+      setInterval(() => {
 
-const journalSlider = document.querySelector("#journal-slider");
+        heroIndex = (heroIndex + 1) % images.length;
 
-  if (journalSlider) {
+        hero.style.backgroundImage =
+          `url(${images[heroIndex]})`;
 
-    const track = journalSlider.querySelector(".journal-track");
-    const slides = journalSlider.querySelectorAll(".journal-slide");
+      }, 5000);
 
-    const prevButton = journalSlider.querySelector(".journal-arrow.prev");
-    const nextButton = journalSlider.querySelector(".journal-arrow.next");
-
-    let currentSlide = 0;
-    let autoSlide;
-
-    function updateSlider() {
-      track.style.transform = `translateX(-${currentSlide * 100}%)`;
     }
 
-    function startAutoSlide() {
-      autoSlide = setInterval(() => {
+
+
+    /* =====================================================
+       DEVELOPMENT JOURNAL SLIDER
+    ===================================================== */
+
+    const journalSlider =
+      document.querySelector("#journal-slider");
+
+    if (journalSlider) {
+
+      const track =
+        journalSlider.querySelector(".journal-track");
+
+      const slides =
+        journalSlider.querySelectorAll(".journal-slide");
+
+      const prevButton =
+        journalSlider.querySelector(".journal-arrow.prev");
+
+      const nextButton =
+        journalSlider.querySelector(".journal-arrow.next");
+
+      const dotsContainer =
+        document.querySelector(".journal-dots");
+
+      let currentSlide = 0;
+      let autoSlide;
+
+
+      /* Create dots */
+
+      if (dotsContainer && slides.length > 1) {
+
+        slides.forEach((_, i) => {
+
+          const dot =
+            document.createElement("button");
+
+          dot.className =
+            "journal-dot";
+
+          dot.setAttribute(
+            "aria-label",
+            `Go to story ${i + 1}`
+          );
+
+          dot.addEventListener("click", () => {
+
+            currentSlide = i;
+
+            updateSlider();
+            restartAutoSlide();
+
+          });
+
+          dotsContainer.appendChild(dot);
+
+        });
+
+      }
+
+
+      const dots =
+        dotsContainer
+          ? dotsContainer.querySelectorAll(".journal-dot")
+          : [];
+
+
+      function updateSlider() {
+
+        if (!track) return;
+
+        track.style.transform =
+          `translateX(-${currentSlide * 100}%)`;
+
+
+        dots.forEach((dot, i) => {
+
+          dot.classList.toggle(
+            "active",
+            i === currentSlide
+          );
+
+        });
+
+      }
+
+
+      function nextSlide() {
 
         currentSlide++;
 
@@ -254,35 +782,80 @@ const journalSlider = document.querySelector("#journal-slider");
 
         updateSlider();
 
-      }, 5000);
+      }
+
+
+      function prevSlide() {
+
+        currentSlide--;
+
+        if (currentSlide < 0) {
+          currentSlide = slides.length - 1;
+        }
+
+        updateSlider();
+
+      }
+
+
+      function startAutoSlide() {
+
+        if (slides.length <= 1) return;
+
+        autoSlide = setInterval(() => {
+
+          nextSlide();
+
+        }, 5000);
+
+      }
+
+
+      function restartAutoSlide() {
+
+        clearInterval(autoSlide);
+
+        startAutoSlide();
+
+      }
+
+
+      nextButton?.addEventListener("click", () => {
+
+        nextSlide();
+        restartAutoSlide();
+
+      });
+
+
+      prevButton?.addEventListener("click", () => {
+
+        prevSlide();
+        restartAutoSlide();
+
+      });
+
+
+      /* Pause autoplay while hovering */
+
+      journalSlider.addEventListener(
+        "mouseenter",
+        () => clearInterval(autoSlide)
+      );
+
+
+      journalSlider.addEventListener(
+        "mouseleave",
+        () => startAutoSlide()
+      );
+
+
+      updateSlider();
+      startAutoSlide();
+
     }
 
-    nextButton.addEventListener("click", () => {
+  </script>
 
-      currentSlide++;
+</Layout>
 
-      if (currentSlide >= slides.length) {
-        currentSlide = 0;
-      }
-
-      updateSlider();
-
-    });
-
-    prevButton.addEventListener("click", () => {
-
-      currentSlide--;
-
-      if (currentSlide < 0) {
-        currentSlide = slides.length - 1;
-      }
-
-      updateSlider();
-
-    });
-
-    updateSlider();
-    startAutoSlide();
-  }
-</script>
-</Layout> 

@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const games = await getCollection('games');
+
   return games.map((game) => ({
     params: { slug: game.slug },
     props: { game },
@@ -12,489 +13,822 @@ export async function getStaticPaths() {
 
 const { game } = Astro.props;
 const { Content } = await render(game);
-
-
-const statusLabel: Record<string, string> = {
-  released: 'Released',
-  'in-development': 'In Development',
-  concept: 'Concept',
-};
-
-const accentClass = game.data.accent === 'crimson' ? 'text-crimson-bright' : 'text-gold';
 ---
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.gallery-track');
+    const prev = document.querySelector('.gallery-btn.prev');
+    const next = document.querySelector('.gallery-btn.next');
 
-  const track = document.querySelector(".gallery-track");
-  const prev = document.querySelector(".gallery-btn.prev");
-  const next = document.querySelector(".gallery-btn.next");
+    if (!track) return;
 
-  if (!track) return;
+    const slideWidth = () => {
+      const slide = track.querySelector('.gallery-slide');
+      return slide ? slide.clientWidth + 24 : 0;
+    };
 
-  const slideWidth = () => {
-    const slide = track.querySelector(".gallery-slide");
-    return slide ? slide.clientWidth + 24 : 0;
-  };
+    prev?.addEventListener('click', () => {
+      track.scrollBy({
+        left: -slideWidth(),
+        behavior: 'smooth',
+      });
+    });
 
-  prev?.addEventListener("click", () => {
-    track.scrollBy({
-      left: -slideWidth(),
-      behavior: "smooth"
+    next?.addEventListener('click', () => {
+      track.scrollBy({
+        left: slideWidth(),
+        behavior: 'smooth',
+      });
+    });
+
+    // =========================
+    // DRAG MOUSE
+    // =========================
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    track.addEventListener('mousedown', (event) => {
+      isDown = true;
+      track.classList.add('dragging');
+
+      startX = event.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', () => {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mouseup', () => {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mousemove', (event) => {
+      if (!isDown) return;
+
+      event.preventDefault();
+
+      const x = event.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.8;
+
+      track.scrollLeft = scrollLeft - walk;
     });
   });
-
-  next?.addEventListener("click", () => {
-    track.scrollBy({
-      left: slideWidth(),
-      behavior: "smooth"
-    });
-  });
-
-  // ===== Drag Mouse =====
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
-  track.addEventListener("mousedown", (e) => {
-    isDown = true;
-    track.classList.add("dragging");
-
-    startX = e.pageX - track.offsetLeft;
-    scrollLeft = track.scrollLeft;
-  });
-
-  track.addEventListener("mouseleave", () => {
-    isDown = false;
-    track.classList.remove("dragging");
-  });
-
-  track.addEventListener("mouseup", () => {
-    isDown = false;
-    track.classList.remove("dragging");
-  });
-
-  track.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-
-    e.preventDefault();
-
-    const x = e.pageX - track.offsetLeft;
-    const walk = (x - startX) * 1.8;
-
-    track.scrollLeft = scrollLeft - walk;
-  });
-
-});
 </script>
 
-<Layout title={game.data.title} description={game.data.tagline}>
-<div
-  class="game-background"
-  style={`background-image:url(${game.data.banner});`}
-></div>
-<section class="relative w-full aspect-video overflow-hidden mt-20">
+<Layout
+  title={game.data.title}
+  description={game.data.tagline}
+>
 
-  <img
-    src={game.data.banner}
-    alt={game.data.title}
-    class="absolute inset-0 w-full h-full object-cover"
-  />
+  <!-- =====================================================
+       GAME BACKGROUND
+  ====================================================== -->
 
-  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+  <div
+    class="game-background"
+    style={`background-image: url("${game.data.banner}");`}
+  ></div>
 
-</section>
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center gap-4 sm:gap-6 lg:gap-10 min-w-0">
 
-  <!-- Logo -->
-  <img
-    src={game.data.logo}
-    alt={`${game.data.title} Logo`}
+  <!-- =====================================================
+       GAME BANNER
+  ====================================================== -->
+
+  <section
+    class="relative w-full aspect-video overflow-hidden mt-20"
+  >
+    <img
+      src={game.data.banner}
+      alt={game.data.title}
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
+    ></div>
+  </section>
+
+
+  <!-- =====================================================
+       GAME INFORMATION
+       BLACK BACKGROUND
+  ====================================================== -->
+
+  <section
     class="
-  w-24
-  sm:w-32
-  md:w-40
-  lg:w-56
-  xl:w-64
-  h-auto
-  object-contain
-  shrink-0
-"
-  />
+      pt-3
+      sm:pt-5
+      pb-10
+      sm:pb-14
+      bg-black
+      border-b
+      border-charcoal-border
+    "
+  >
 
-  <!-- Semua informasi di sebelah kanan -->
-  <div class="flex-1 min-w-2">
+    <div
+      class="
+        max-w-6xl
+        mx-auto
+        px-4
+        sm:px-6
+        lg:px-8
+      "
+    >
 
-    <h1 class="display-headline text-2xl sm:text-3xl md:text-5xl lg:text-6xl break-words">
-      {game.data.title}
-    </h1>
+      <div
+        class="
+          flex
+          items-center
+          gap-4
+          sm:gap-6
+          lg:gap-10
+          min-w-0
+        "
+      >
 
-    <p class="mt-2 text-gold text-sm sm:text-base lg:text-lg leading-snug">
-      {game.data.tagline}
-    </p>
+        <!-- =================================================
+             GAME LOGO
+        ================================================== -->
 
-    <!-- Platform & Engine -->
-    <div class="flex flex-wrap gap-6 sm:gap-10 mt-5 sm:mt-8 text-xs sm:text-sm">
+        <img
+          src={game.data.logo}
+          alt={`${game.data.title} Logo`}
+          class="
+            w-24
+            sm:w-32
+            md:w-40
+            lg:w-56
+            xl:w-64
+            h-auto
+            object-contain
+            shrink-0
+          "
+        />
 
-  <!-- PLATFORM -->
-  <div>
-    <p class="curio-plate text-muted mb-2">
-      Platform
-    </p>
 
-    <div class="flex items-center gap-2">
-      <img
-        src={game.data.platform.logo}
-        alt={game.data.platform.name}
-        class="platform-icon"
-      />
+        <!-- =================================================
+             GAME INFORMATION
+        ================================================== -->
 
-      <p class="text-bone/80">
-        {game.data.platform.name}
-      </p>
+        <div class="flex-1 min-w-0">
+
+          <!-- TITLE -->
+
+          <h1
+            class="
+              display-headline
+              text-2xl
+              sm:text-3xl
+              md:text-5xl
+              lg:text-6xl
+              break-words
+            "
+          >
+            {game.data.title}
+          </h1>
+
+
+          <!-- TAGLINE -->
+
+          <p
+            class="
+              mt-2
+              text-gold
+              text-sm
+              sm:text-base
+              lg:text-lg
+              leading-snug
+            "
+          >
+            {game.data.tagline}
+          </p>
+
+
+          <!-- =================================================
+               PLATFORM & ENGINE
+          ================================================== -->
+
+          <div
+            class="
+              flex
+              flex-wrap
+              gap-6
+              sm:gap-10
+              mt-5
+              sm:mt-8
+              text-xs
+              sm:text-sm
+            "
+          >
+
+            <!-- PLATFORM -->
+
+            <div>
+
+              <p class="curio-plate text-muted mb-2">
+                Platform
+              </p>
+
+              <div class="flex items-center gap-2">
+
+                <img
+                  src={game.data.platform.logo}
+                  alt={game.data.platform.name}
+                  class="platform-icon"
+                />
+
+                <p class="text-bone/80">
+                  {game.data.platform.name}
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- ENGINE -->
+
+            <div>
+
+              <p class="curio-plate text-muted mb-2">
+                Engine
+              </p>
+
+              <div class="flex items-center gap-2">
+
+                <img
+                  src={game.data.engine.logo}
+                  alt={game.data.engine.name}
+                  class="engine-icon"
+                />
+
+                <p class="text-bone/80">
+                  {game.data.engine.name}
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               BUTTONS
+          ================================================== -->
+
+          <div
+            class="
+              flex
+              flex-wrap
+              gap-2
+              sm:gap-3
+              lg:gap-4
+              mt-5
+              sm:mt-8
+            "
+          >
+
+            <!-- STATUS BUTTON -->
+
+            {
+              game.data.status === 'released' ? (
+
+                <a
+                  href={game.data.itchUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    px-3
+                    py-2
+                    sm:px-5
+                    sm:py-3
+                    lg:px-8
+                    lg:py-4
+                    text-[10px]
+                    sm:text-xs
+                    lg:text-sm
+                    bg-crimson-bright
+                    text-white
+                    font-semibold
+                    uppercase
+                    tracking-wider
+                    whitespace-nowrap
+                    transition-all
+                    duration-300
+                    hover:scale-105
+                    hover:shadow-lg
+                  "
+                >
+                  Download on itch.io
+                </a>
+
+              ) : game.data.status === 'in-development' ? (
+
+                <button
+                  type="button"
+                  disabled
+                  class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    px-3
+                    py-2
+                    sm:px-5
+                    sm:py-3
+                    lg:px-8
+                    lg:py-4
+                    text-[10px]
+                    sm:text-xs
+                    lg:text-sm
+                    bg-crimson-bright
+                    text-white
+                    font-semibold
+                    uppercase
+                    tracking-wider
+                    whitespace-nowrap
+                  "
+                >
+                  Coming Soon
+                </button>
+
+              ) : (
+
+                <button
+                  type="button"
+                  disabled
+                  class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    px-3
+                    py-2
+                    sm:px-5
+                    sm:py-3
+                    lg:px-8
+                    lg:py-4
+                    text-[10px]
+                    sm:text-xs
+                    lg:text-sm
+                    bg-crimson-bright
+                    text-white
+                    font-semibold
+                    uppercase
+                    tracking-wider
+                    whitespace-nowrap
+                  "
+                >
+                  Concept
+                </button>
+
+              )
+            }
+
+
+            <!-- WATCH TRAILER -->
+
+            <a
+              href="#trailer"
+              class="
+                inline-flex
+                items-center
+                justify-center
+                px-3
+                py-2
+                sm:px-5
+                sm:py-3
+                lg:px-8
+                lg:py-4
+                text-[10px]
+                sm:text-xs
+                lg:text-sm
+                bg-crimson-bright
+                text-white
+                font-semibold
+                uppercase
+                tracking-wider
+                whitespace-nowrap
+                transition-all
+                duration-300
+                hover:scale-105
+                hover:shadow-lg
+              "
+            >
+              ▶ Watch Trailer
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
-  </div>
+
+  </section>
 
 
-  <!-- ENGINE -->
-  <div>
-    <p class="curio-plate text-muted mb-2">
-      Engine
-    </p>
+  <!-- =====================================================
+       TRAILER
+  ====================================================== -->
 
-    <div class="flex items-center gap-2">
-      <img
-        src={game.data.engine.logo}
-        alt={game.data.engine.name}
-        class="engine-icon"
-      />
+  <section
+    id="trailer"
+    class="
+      py-16
+      px-6
+      border-b
+      border-charcoal-border
+    "
+  >
 
-      <p class="text-bone/80">
-        {game.data.engine.name}
+    <div
+      class="max-w-4xl mx-auto"
+      data-reveal="scale"
+    >
+
+      <p class="eyebrow mb-4">
+        Trailer
       </p>
+
+
+      <div
+        class="
+          relative
+          aspect-video
+          overflow-hidden
+          border
+          border-charcoal-border
+          bg-charcoal
+          grain-panel
+        "
+      >
+
+        {
+          game.data.trailer ? (
+
+            <iframe
+              class="w-full h-full"
+              src={`https://www.youtube.com/embed/${game.data.trailer.youtube}`}
+              title={`${game.data.title} Trailer`}
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+
+          ) : (
+
+            <div
+              class="
+                w-full
+                h-full
+                flex
+                flex-col
+                items-center
+                justify-center
+                gap-3
+              "
+            >
+
+              <img
+                src={game.data.cover}
+                alt={`${game.data.title} placeholder`}
+                class="
+                  absolute
+                  inset-0
+                  w-full
+                  h-full
+                  object-cover
+                  opacity-30
+                "
+              />
+
+
+              <div
+                class="
+                  relative
+                  z-10
+                  flex
+                  flex-col
+                  items-center
+                  gap-3
+                  text-center
+                  px-6
+                "
+              >
+
+                <svg
+                  width="52"
+                  height="52"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="text-gold"
+                >
+
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="11"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                  />
+
+                  <path
+                    d="M10 8.5L16 12L10 15.5V8.5Z"
+                    fill="currentColor"
+                  />
+
+                </svg>
+
+
+                <p class="curio-plate text-muted">
+                  Trailer coming soon
+                </p>
+
+              </div>
+
+            </div>
+
+          )
+        }
+
+      </div>
+
     </div>
-  </div>
 
-</div>
+  </section>
 
-    <!-- Tombol -->
-    <div class="flex flex-wrap gap-2 sm:gap-3 lg:gap-4 mt-5 sm:mt-8">
+
+  <!-- =====================================================
+       SCREENSHOT GALLERY
+  ====================================================== -->
+
+  {
+    game.data.gallery?.length > 0 && (
+
+      <section
+        class="
+          py-16
+          px-6
+          border-b
+          border-charcoal-border
+        "
+      >
+
+        <div class="max-w-6xl mx-auto">
+
+          <p class="eyebrow mb-8 text-center">
+            Gallery
+          </p>
+
+
+          <div class="gallery-slider">
+
+            <!-- PREVIOUS BUTTON -->
+
+            <button
+              type="button"
+              class="gallery-btn prev"
+              aria-label="Previous screenshot"
+            >
+              &#10094;
+            </button>
+
+
+            <!-- GALLERY TRACK -->
+
+            <div class="gallery-track">
+
+              {
+                game.data.gallery.map(
+                  (shot: string, i: number) => (
+
+                    <div class="gallery-slide">
+
+                      <img
+                        src={shot}
+                        alt={`${game.data.title} Screenshot ${i + 1}`}
+                        loading="lazy"
+                      />
+
+                    </div>
+
+                  )
+                )
+              }
+
+            </div>
+
+
+            <!-- NEXT BUTTON -->
+
+            <button
+              type="button"
+              class="gallery-btn next"
+              aria-label="Next screenshot"
+            >
+              &#10095;
+            </button>
+
+          </div>
+
+
+          <div class="gallery-dots"></div>
+
+        </div>
+
+      </section>
+
+    )
+  }
+
+
+  <!-- =====================================================
+       STORY
+  ====================================================== -->
+
+  <section
+    class="story-section py-16 px-6"
+    style={`--story-bg: url("${game.data.storyBackground}");`}
+  >
+
+    <div
+      class="
+        story-layout
+        max-w-6xl
+        mx-auto
+        relative
+        z-10
+      "
+    >
+
+      <!-- CHARACTERS -->
 
       {
-        game.data.status === "released" ? (
+        game.data.characters?.length > 0 && (
 
-          <a
-            href={game.data.itchUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="
-  inline-flex
-  items-center
-  justify-center
-  px-3
-  py-2
-  sm:px-5
-  sm:py-3
-  lg:px-8
-  lg:py-4
-  text-[10px]
-  sm:text-xs
-  lg:text-sm
-  bg-crimson-bright
-  text-white
-  font-semibold
-  uppercase
-  tracking-wider
-  whitespace-nowrap
-  transition-all
-  duration-300
-  hover:scale-105
-  hover:shadow-lg
-"
-          >
-            Download on itch.io
-          </a>
+          <aside class="character-column">
 
-        ) : game.data.status === "in-development" ? (
+            {
+              game.data.characters.map((character) => (
 
-          <button
-            disabled
-            class="
-  inline-flex
-  items-center
-  justify-center
-  px-3
-  py-2
-  sm:px-5
-  sm:py-3
-  lg:px-8
-  lg:py-4
-  text-[10px]
-  sm:text-xs
-  lg:text-sm
-  bg-crimson-bright
-  text-white
-  font-semibold
-  uppercase
-  tracking-wider
-  whitespace-nowrap
-  transition-all
-  duration-300
-  hover:scale-105
-  hover:shadow-lg
-"
-          >
-            Coming Soon
-          </button>
+                <div
+                  class="character-card"
+                  data-reveal="fade"
+                >
 
-        ) : (
+                  <div class="character-image">
 
-          <button
-            disabled
-            class="
-  inline-flex
-  items-center
-  justify-center
-  px-3
-  py-2
-  sm:px-5
-  sm:py-3
-  lg:px-8
-  lg:py-4
-  text-[10px]
-  sm:text-xs
-  lg:text-sm
-  bg-crimson-bright
-  text-white
-  font-semibold
-  uppercase
-  tracking-wider
-  whitespace-nowrap
-  transition-all
-  duration-300
-  hover:scale-105
-  hover:shadow-lg
-"
-          >
-            Concept
-          </button>
+                    <img
+                      src={character.image}
+                      alt={character.name}
+                      loading="lazy"
+                    />
+
+                  </div>
+
+
+                  <p class="character-name">
+                    {character.name}
+                  </p>
+
+                </div>
+
+              ))
+            }
+
+          </aside>
 
         )
       }
 
-      <a
-        href="#trailer"
-        class="
-  inline-flex
-  items-center
-  justify-center
-  px-3
-  py-2
-  sm:px-5
-  sm:py-3
-  lg:px-8
-  lg:py-4
-  text-[10px]
-  sm:text-xs
-  lg:text-sm
-  bg-crimson-bright
-  text-white
-  font-semibold
-  uppercase
-  tracking-wider
-  whitespace-nowrap
-  transition-all
-  duration-300
-  hover:scale-105
-  hover:shadow-lg
-"
+
+      <!-- STORY CONTENT -->
+
+      <article
+        class="story-content prose-cc"
+        data-reveal="fade"
       >
-        ▶ Watch Trailer
+
+        <Content />
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       DEVELOPED BY
+  ====================================================== -->
+
+  <section
+    class="
+      py-20
+      px-6
+      border-t
+      border-charcoal-border
+    "
+  >
+
+    <div
+      class="max-w-3xl mx-auto text-center"
+      data-reveal="fade"
+    >
+
+      <!-- LOGO -->
+
+      <img
+        src="/images/logo.png"
+        alt="CurioCat Studio"
+        class="w-20 h-20 mx-auto mb-6"
+      />
+
+
+      <!-- HEADING -->
+
+      <p class="eyebrow mb-3">
+        Developed by
+      </p>
+
+
+      <h2
+        class="
+          font-display
+          text-4xl
+          uppercase
+          tracking-tightest
+          font-semibold
+          text-bone
+        "
+      >
+        CurioCat Studio
+      </h2>
+
+
+      <!-- FOUNDER -->
+
+      <p class="mt-4 text-bone/70">
+
+        Founded by
+
+        <span class="text-bone font-medium">
+          Muhammad Syauqi Akifur Rahman
+        </span>
+
+      </p>
+
+
+      <!-- BUTTON -->
+
+      <a
+        href="/about"
+        class="
+          inline-flex
+          items-center
+          gap-2
+          mt-10
+          px-6
+          py-3
+          border
+          border-charcoal-border
+          hover:border-gold
+          hover:text-gold
+          transition-all
+          duration-300
+        "
+      >
+
+        Learn More About the Studio
+
+        <span>→</span>
+
       </a>
 
     </div>
 
-  </div>
-
-</div>
-  <!-- TRAILER -->
-  <section id="trailer" class="py-16 px-6 border-b border-charcoal-border">
-    <div class="max-w-4xl mx-auto" data-reveal="scale">
-      <p class="eyebrow mb-4">Trailer</p>
-      <div class="relative aspect-video overflow-hidden border border-charcoal-border bg-charcoal grain-panel">
-        {
-  game.data.trailer ? (
-    <iframe
-  class="w-full h-full rounded-lg"
-  src={`https://www.youtube.com/embed/${game.data.trailer.youtube}`}
-  title={`${game.data.title} Trailer`}
-  referrerpolicy="strict-origin-when-cross-origin"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-  ) : (
-    <div class="w-full h-full flex flex-col items-center justify-center gap-3">
-      <img
-        src={game.data.cover}
-        alt={`${game.data.title} placeholder`}
-        class="absolute inset-0 w-full h-full object-cover opacity-30"
-      />
-      <div class="relative z-10 flex flex-col items-center gap-3 text-center px-6">
-        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" class="text-gold">
-          <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.4" />
-          <path d="M10 8.5L16 12L10 15.5V8.5Z" fill="currentColor" />
-        </svg>
-
-        <p class="curio-plate text-muted">
-          Trailer coming soon
-        </p>
-      </div>
-    </div>
-  )
-}
-      </div>
-    </div>
   </section>
 
-  <!-- SCREENSHOT GALLERY -->
-  {game.data.gallery.length > 0 && (
-<section class="py-16 px-6 border-b border-charcoal-border">
-
-  <div class="max-w-6xl mx-auto">
-
-    <p class="eyebrow mb-8 text-center">
-      Gallery
-    </p>
-
-    <div class="gallery-slider">
-
-      <button class="gallery-btn prev">
-        &#10094;
-      </button>
-
-      <div class="gallery-track">
-
-        {game.data.gallery.map((shot: string, i: number) => (
-
-          <div class="gallery-slide">
-
-            <img
-              src={shot}
-              alt={`${game.data.title} Screenshot ${i + 1}`}
-            />
-
-          </div>
-
-        ))}
-
-      </div>
-
-      <button class="gallery-btn next">
-        &#10095;
-      </button>
-
-    </div>
-
-    <div class="gallery-dots"></div>
-
-  </div>
-
-</section>
-)}
-
- <!-- CONTENT -->
-<section
-  class="story-section py-16 px-6"
-  style={`--story-bg: url("${game.data.storyBackground}");`}
->
-  <div class="story-layout max-w-6xl mx-auto relative z-10">
-
-    <!-- CHARACTERS -->
-    {game.data.characters?.length > 0 && (
-      <aside class="character-column">
-
-        {game.data.characters.map((character) => (
-          <div class="character-card" data-reveal="fade">
-            
-            <div class="character-image">
-              <img
-                src={character.image}
-                alt={character.name}
-                loading="lazy"
-              />
-            </div>
-
-            <p class="character-name">
-              {character.name}
-            </p>
-
-          </div>
-        ))}
-
-      </aside>
-    )}
-
-    <!-- STORY -->
-    <article
-      class="story-content prose-cc"
-      data-reveal="fade"
-    >
-      <Content />
-    </article>
-
-  </div>
-</section>
-
-  
-
-  <!-- DEVELOPED BY -->
-<section class="py-20 px-6 border-t border-charcoal-border">
-  <div
-    class="max-w-3xl mx-auto text-center"
-    data-reveal="fade"
-  >
-
-    <!-- Logo -->
-    <img
-      src="/images/logo.png"
-      alt="CurioCat Studio"
-      class="w-20 h-20 mx-auto mb-6"
-    />
-
-    <!-- Heading -->
-    <p class="eyebrow mb-3">
-      Developed by
-    </p>
-
-    <h2 class="font-display text-4xl uppercase tracking-tightest font-semibold text-bone">
-      CurioCat Studio
-    </h2>
-
-    
-
-    <!-- Founder -->
-    <p class="mt-4 text-bone/70">
-      Founded by
-      <span class="text-bone font-medium">
-        Muhammad Syauqi Akifur Rahman
-      </span>
-    </p>
-
-    <!-- Button -->
-    <a
-      href="/about"
-      class="inline-flex items-center gap-2 mt-10 px-6 py-3 border border-charcoal-border hover:border-gold hover:text-gold transition-all duration-300"
-    >
-      Learn More About the Studio
-      <span>→</span>
-    </a>
-
-  </div>
-</section>
 </Layout>
 
+
+<!-- =====================================================
+     STORY / PROSE CSS
+====================================================== -->
+
 <style is:global>
+
   .prose-cc h2 {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 1.5rem;
@@ -502,18 +836,26 @@ document.addEventListener("DOMContentLoaded", () => {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
   }
+
+
   .prose-cc p {
     color: #8C8A85;
     line-height: 1.8;
     margin-bottom: 1.25rem;
   }
+
+
   .prose-cc strong {
     color: #F2F0EA;
   }
+
+
   .prose-cc ul {
     margin: 1.25rem 0;
     padding-left: 1.25rem;
   }
+
+
   .prose-cc li {
     color: #8C8A85;
     line-height: 1.8;
@@ -522,6 +864,8 @@ document.addEventListener("DOMContentLoaded", () => {
     position: relative;
     padding-left: 1.25rem;
   }
+
+
   .prose-cc li::before {
     content: '';
     position: absolute;
@@ -532,7 +876,10 @@ document.addEventListener("DOMContentLoaded", () => {
     background: #C9A15A;
     border-radius: 999px;
   }
+
+
   .prose-cc em {
     color: #9C978C;
   }
+
 </style>

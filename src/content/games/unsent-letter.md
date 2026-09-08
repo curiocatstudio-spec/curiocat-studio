@@ -37,7 +37,7 @@ gallery:
   - "/images/games/UL6.png"
 
 characters:
-  - name: "Unknow"
+  - name: "Unknown"
     image: "/images/karakter unsent letter(1).png"
 
   - name: ""

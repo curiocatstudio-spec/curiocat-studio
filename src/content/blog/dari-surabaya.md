@@ -7,7 +7,7 @@ tag: "Studio Notes"
 cover: "/images/blog/darisby.png"
 ---
 
-# Membangun Studio Indie dari Surabaya
+
 
 Membangun sebuah game bukan hanya tentang menulis kode atau membuat model 3D. Bagi kami, ini adalah tentang menciptakan sebuah dunia yang mampu meninggalkan kesan bagi siapa pun yang memainkannya.
 
