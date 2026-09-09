@@ -48,20 +48,21 @@ const team = [
   title="About"
   description="CurioCat Studio is an independent game development studio based in Surabaya, Indonesia. Learn about our values, our craft, and the way we build games."
 >
-  <!-- ABOUT HERO -->
-  <section
-    class="relative pt-36 md:pt-40 pb-20 px-6 border-b border-charcoal-border overflow-hidden"
-  >
-    <div class="grid-backdrop"></div>
+  <!-- ========================================= -->
+  <!-- HERO -->
+  <!-- ========================================= -->
 
-    <div class="relative max-w-6xl mx-auto" data-reveal="fade">
-      <div class="max-w-4xl">
-        <p class="eyebrow mb-4">
+  <section class="relative overflow-hidden border-b border-charcoal-border">
+    <div class="grid-backdrop absolute inset-0"></div>
+
+    <div class="relative mx-auto max-w-6xl px-6 pb-24 pt-36 md:pb-28 md:pt-44">
+      <div class="max-w-4xl" data-reveal="fade">
+        <p class="eyebrow mb-5">
           About the Studio
         </p>
 
         <h1
-          class="font-display text-4xl md:text-6xl uppercase tracking-tightest font-semibold text-bone leading-tight"
+          class="font-display text-4xl font-semibold uppercase leading-[1.05] tracking-tightest text-bone sm:text-5xl md:text-6xl lg:text-7xl"
         >
           Turning
           <span class="text-gold">Simple Ideas</span>
@@ -69,185 +70,242 @@ const team = [
           Into Unforgettable Games
         </h1>
 
-        <p class="mt-7 text-lg text-muted leading-relaxed max-w-2xl">
-          CurioCat Studio is an independent game development studio based in
-          Surabaya, Indonesia.
-        </p>
+        <div class="mt-8 max-w-2xl space-y-4">
+          <p class="text-lg leading-relaxed text-bone/90">
+            CurioCat Studio is an independent game development studio based in
+            Surabaya, Indonesia.
+          </p>
 
-        <p class="mt-4 text-muted leading-relaxed max-w-2xl">
-          Inspired by curiosity, we believe every unforgettable game begins
-          with a simple idea.
-        </p>
+          <p class="leading-relaxed text-muted">
+            Inspired by curiosity, we believe every unforgettable game begins
+            with a simple idea.
+          </p>
 
-        <p class="mt-4 text-muted leading-relaxed max-w-2xl">
-          Our mission is to transform simple ideas into unforgettable games
-          that spark curiosity, inspire imagination, and leave players with
-          meaningful experiences.
-        </p>
+          <p class="leading-relaxed text-muted">
+            Our mission is to transform simple ideas into unforgettable games
+            that spark curiosity, inspire imagination, and leave players with
+            meaningful experiences.
+          </p>
 
-        <p class="mt-4 text-muted leading-relaxed max-w-2xl">
-          From the first sketch to the final build, every project is crafted
-          with creativity, care, and attention to detail.
-        </p>
+          <p class="leading-relaxed text-muted">
+            From the first sketch to the final build, every project is crafted
+            with creativity, care, and attention to detail.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
+
+  <!-- ========================================= -->
   <!-- HOW WE WORK -->
-  <section
-    class="py-20 md:py-24 px-6 border-b border-charcoal-border grain-panel"
-  >
-    <div class="max-w-6xl mx-auto">
+  <!-- ========================================= -->
+
+  <section class="border-b border-charcoal-border">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
       <div
-        class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center"
+        class="grid items-center gap-12 md:grid-cols-[0.9fr_1.1fr] lg:gap-20"
       >
+        <!-- Logo -->
         <div data-reveal="left">
-          <img
-            src="/images/logo.png"
-            alt="CurioCat Studio"
-            class="w-full max-w-xl border border-charcoal-border"
-          />
+          <div
+            class="flex aspect-square items-center justify-center border border-charcoal-border bg-black/10 p-8 md:p-12"
+          >
+            <img
+              src="/images/logo.png"
+              alt="CurioCat Studio"
+              class="w-full max-w-md object-contain"
+              loading="lazy"
+            />
+          </div>
         </div>
 
+        <!-- Content -->
         <div class="max-w-xl" data-reveal="right">
           <p class="eyebrow mb-4">
             How We Work
           </p>
 
           <h2
-            class="font-display text-3xl md:text-4xl uppercase tracking-tightest font-semibold text-bone leading-tight mb-6"
+            class="font-display text-3xl font-semibold uppercase leading-[1.1] tracking-tightest text-bone md:text-4xl lg:text-5xl"
           >
             From Simple Ideas
             <br />
-            To Meaningful Experiences
+            <span class="text-gold">To Meaningful Experiences</span>
           </h2>
 
-          <p class="text-bone/90 leading-relaxed mb-5">
-            Every project starts with a simple idea. Instead of chasing trends
-            or unnecessary complexity, we focus on refining concepts until
-            they become memorable gameplay experiences.
-          </p>
+          <div class="mt-7 space-y-5">
+            <p class="leading-relaxed text-bone/90">
+              Every project starts with a simple idea. Instead of chasing trends
+              or unnecessary complexity, we focus on refining concepts until
+              they become memorable gameplay experiences.
+            </p>
 
-          <p class="text-muted leading-relaxed">
-            From concept, game design, programming, and 3D art to the final
-            polish, every part of development is driven by curiosity,
-            craftsmanship, and a passion for creating games people will
-            remember.
-          </p>
+            <p class="leading-relaxed text-muted">
+              From concept, game design, programming, and 3D art to the final
+              polish, every part of development is driven by curiosity,
+              craftsmanship, and a passion for creating games people will
+              remember.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+
+  <!-- ========================================= -->
   <!-- OUR VALUES -->
-  <section
-    class="py-24 md:py-28 px-6 border-b border-charcoal-border"
-  >
-    <div class="max-w-6xl mx-auto">
-      <div class="max-w-3xl mb-14" data-reveal="fade">
-        <p class="eyebrow mb-3">
+  <!-- ========================================= -->
+
+  <section class="border-b border-charcoal-border">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
+      <!-- Heading -->
+      <div class="mb-12 max-w-3xl md:mb-14" data-reveal="fade">
+        <p class="eyebrow mb-4">
           What We Believe
         </p>
 
         <h2
-          class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone leading-tight"
+          class="font-display text-3xl font-semibold uppercase leading-tight tracking-tightest text-bone md:text-5xl"
         >
           Our Values
         </h2>
 
-        <p class="text-muted leading-relaxed mt-5 max-w-2xl">
+        <p class="mt-5 max-w-2xl leading-relaxed text-muted">
           The principles that guide how we think, create, and build every
           project at CurioCat Studio.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {values.map((value, i) => (
-          <div
-            class="p-7 md:p-8 border border-charcoal-border panel"
-            data-reveal="scale"
-            style={`--delay:${i * 100}ms`}
-          >
-            <h3 class="font-display text-xl md:text-2xl text-gold mb-4">
-              {value.title}
-            </h3>
+      <!-- Cards -->
+      <div class="grid gap-5 md:grid-cols-3 md:gap-6">
+        {
+          values.map((value, i) => (
+            <article
+              class="panel group relative overflow-hidden border border-charcoal-border p-6 md:p-8"
+              data-reveal="scale"
+              style={`--delay:${i * 100}ms`}
+            >
+              <div
+                class="absolute left-0 top-0 h-px w-0 bg-gold transition-all duration-500 group-hover:w-full"
+              ></div>
 
-            <p class="text-sm text-muted leading-relaxed">
-              {value.body}
-            </p>
-          </div>
-        ))}
+              <span class="mb-7 block font-display text-xs tracking-[0.2em] text-muted">
+                0{i + 1}
+              </span>
+
+              <h3 class="font-display text-xl text-gold md:text-2xl">
+                {value.title}
+              </h3>
+
+              <p class="mt-4 text-sm leading-7 text-muted">
+                {value.body}
+              </p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
 
+
+  <!-- ========================================= -->
   <!-- OUR CRAFT -->
-  <section
-    class="py-24 md:py-28 px-6 border-b border-charcoal-border"
-  >
-    <div class="max-w-6xl mx-auto">
-      <div class="max-w-3xl mb-12" data-reveal="fade">
-        <p class="eyebrow mb-3">
-          What We Do
-        </p>
+  <!-- ========================================= -->
 
-        <h2
-          class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone leading-tight"
-        >
-          Our Craft
-        </h2>
-
-        <p class="text-muted leading-relaxed mt-5 max-w-2xl">
-          A multidisciplinary approach combining art, technology, design, and
-          storytelling to create complete interactive experiences.
-        </p>
-      </div>
-
-      <div class="flex flex-wrap gap-3" data-reveal="fade">
-        {disciplines.map((discipline) => (
-          <span
-            class="curio-plate px-4 py-2 border border-charcoal-border text-bone/70"
-          >
-            {discipline}
-          </span>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- MEET THE DEVELOPER -->
-  <section
-    class="py-24 md:py-28 px-6 border-b border-charcoal-border"
-  >
-    <div class="max-w-6xl mx-auto">
+  <section class="border-b border-charcoal-border grain-panel">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
       <div
-        class="grid grid-cols-1 md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr] gap-10 lg:gap-16 items-start"
-        data-reveal="fade"
+        class="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-start lg:gap-20"
       >
-        <div>
-          <img
-            src="/images/syauqi.jpeg"
-            alt="Muhammad Syauqi Akifur Rahman"
-            class="w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full object-cover border border-charcoal-border"
-          />
+        <!-- Heading -->
+        <div data-reveal="left">
+          <p class="eyebrow mb-4">
+            What We Do
+          </p>
+
+          <h2
+            class="font-display text-3xl font-semibold uppercase leading-tight tracking-tightest text-bone md:text-5xl"
+          >
+            Our Craft
+          </h2>
+
+          <p class="mt-5 max-w-md leading-relaxed text-muted">
+            A multidisciplinary approach combining art, technology, design, and
+            storytelling to create complete interactive experiences.
+          </p>
         </div>
 
+        <!-- Disciplines -->
+        <div data-reveal="right">
+          <div class="grid gap-3 sm:grid-cols-2">
+            {
+              disciplines.map((discipline, i) => (
+                <div
+                  class="group flex min-h-16 items-center border border-charcoal-border px-5 py-4 transition-colors duration-300 hover:border-gold/50"
+                  style={`--delay:${i * 70}ms`}
+                >
+                  <span class="mr-4 font-display text-xs text-gold/60">
+                    0{i + 1}
+                  </span>
+
+                  <span class="text-sm leading-snug text-bone/75 transition-colors group-hover:text-bone">
+                    {discipline}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================= -->
+  <!-- FOUNDER -->
+  <!-- ========================================= -->
+
+  <section class="border-b border-charcoal-border">
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
+      <div
+        class="grid gap-10 md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] lg:gap-16"
+        data-reveal="fade"
+      >
+        <!-- Portrait -->
+        <div>
+          <div class="relative mx-auto w-full max-w-[280px] md:mx-0">
+            <div
+              class="absolute -inset-2 border border-charcoal-border opacity-60"
+            ></div>
+
+            <img
+              src="/images/syauqi.jpeg"
+              alt="Muhammad Syauqi Akifur Rahman"
+              class="relative aspect-square w-full rounded-full border border-charcoal-border object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Founder content -->
         <div class="max-w-3xl">
-          <p class="eyebrow mb-3">
+          <p class="eyebrow mb-4">
             Behind CurioCat Studio
           </p>
 
           <h2
-            class="font-display text-3xl md:text-4xl text-bone leading-tight"
+            class="font-display text-3xl leading-tight tracking-tight text-bone md:text-4xl lg:text-5xl"
           >
             Muhammad Syauqi Akifur Rahman
           </h2>
 
-          <p class="text-gold mt-3">
+          <p class="mt-3 text-sm uppercase tracking-[0.15em] text-gold">
             Founder / Game Developer / 3D Artist
           </p>
 
-          <div class="mt-7 space-y-4 text-muted leading-8">
+          <div class="mt-7 space-y-5 leading-8 text-muted">
             <p>
               I'm the founder of CurioCat Studio, where I lead a small team of
               passionate creators dedicated to developing meaningful
@@ -269,7 +327,8 @@ const team = [
             </p>
           </div>
 
-          <div class="flex flex-wrap gap-3 mt-8">
+          <!-- Skills -->
+          <div class="mt-8 flex flex-wrap gap-2">
             <span class="curio-plate">Blender</span>
             <span class="curio-plate">Unity</span>
             <span class="curio-plate">C#</span>
@@ -278,23 +337,34 @@ const team = [
             <span class="curio-plate">Lighting</span>
           </div>
 
-          <div class="flex flex-wrap gap-6 mt-8">
+          <!-- Socials -->
+          <div class="mt-8 flex flex-wrap gap-x-7 gap-y-3">
             <a
               href="https://www.linkedin.com/in/muhammad-syauqi-akifur-rahman-ba2670353/"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-muted hover:text-gold transition"
+              class="group text-sm text-muted transition-colors hover:text-gold"
             >
               LinkedIn
+              <span
+                class="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1"
+              >
+                ↗
+              </span>
             </a>
 
             <a
               href="https://www.instagram.com/aakifurr_/"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-muted hover:text-gold transition"
+              class="group text-sm text-muted transition-colors hover:text-gold"
             >
               Instagram
+              <span
+                class="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1"
+              >
+                ↗
+              </span>
             </a>
           </div>
         </div>
@@ -302,60 +372,69 @@ const team = [
     </div>
   </section>
 
-  <!-- OUR TEAM -->
-  <section class="py-24 md:py-28 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="max-w-3xl mb-14" data-reveal="fade">
-        <p class="eyebrow mb-3">
+
+  <!-- ========================================= -->
+  <!-- TEAM -->
+  <!-- ========================================= -->
+
+  <section>
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-24">
+      <!-- Heading -->
+      <div class="mb-12 max-w-3xl md:mb-14" data-reveal="fade">
+        <p class="eyebrow mb-4">
           The People Behind The Games
         </p>
 
         <h2
-          class="font-display text-3xl md:text-5xl uppercase tracking-tightest font-semibold text-bone leading-tight"
+          class="font-display text-3xl font-semibold uppercase leading-tight tracking-tightest text-bone md:text-5xl"
         >
           Our Team
         </h2>
 
-        <p class="text-muted max-w-2xl mt-5 leading-relaxed">
+        <p class="mt-5 max-w-2xl leading-relaxed text-muted">
           A small team driven by curiosity, creativity, and a passion for
           creating memorable interactive experiences.
         </p>
       </div>
 
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
-        {team.map((member, i) => (
-          <div
-            class="group border border-charcoal-border panel p-5"
-            data-reveal="scale"
-            style={`--delay:${i * 100}ms`}
-          >
-            <div
-              class="aspect-square overflow-hidden border border-charcoal-border mb-5"
+      <!-- Team cards -->
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        {
+          team.map((member, i) => (
+            <article
+              class="group border border-charcoal-border panel p-4 md:p-5"
+              data-reveal="scale"
+              style={`--delay:${i * 100}ms`}
             >
-              <img
-                src={member.image}
-                alt={member.name}
-                loading="lazy"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
+              <div class="relative aspect-square overflow-hidden border border-charcoal-border">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  loading="lazy"
+                  class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
 
-            <div>
-              <h3
-                class="font-display text-lg md:text-xl text-bone leading-snug"
-              >
-                {member.name}
-              </h3>
+                <div
+                  class="pointer-events-none absolute inset-0 border border-transparent transition-colors duration-500 group-hover:border-gold/30"
+                ></div>
+              </div>
 
-              <p class="text-sm text-gold mt-2">
-                {member.role}
-              </p>
-            </div>
-          </div>
-        ))}
+              <div class="px-1 pb-1 pt-5">
+                <h3
+                  class="font-display text-lg leading-snug text-bone md:text-xl"
+                >
+                  {member.name}
+                </h3>
+
+                <p class="mt-2 text-xs uppercase tracking-[0.15em] text-gold">
+                  {member.role}
+                </p>
+              </div>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
 </Layout>
+```
