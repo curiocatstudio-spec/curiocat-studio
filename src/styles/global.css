@@ -825,19 +825,14 @@ textarea:focus-visible {
   max-width: 100%;
   object-fit: contain;
 
-  opacity: 0.6;
-  filter: grayscale(100%);
+  opacity: 1;
+  filter: none;
 
-  transition:
-    opacity 0.3s ease,
-    filter 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
-
-/* Hover */
 .partner-logo:hover {
-  opacity: 1;
-  filter: grayscale(0%);
+  opacity: 0.8;
 }
 
 
